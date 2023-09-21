@@ -27,6 +27,8 @@ import Transfer from "./screens/Transfer";
 import Confirmation from "./screens/Confirmation";
 import Notification1 from "./screens/Notification1";
 import Profile from "./screens/Profile";
+import Expense from "./screens/Expense";
+import Reports from "./screens/Reports";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View, Text, Pressable, TouchableOpacity } from "react-native";
@@ -147,6 +149,18 @@ const App = () => {
               component={Notification1}
               options={{ headerShown: false }}
             />
+             <Stack.Screen
+              name="Expense"
+              component={Expense}
+              options={{ headerShown: false }}
+            />
+             <Stack.Screen
+              name="Reports"
+              component={Reports}
+              options={{ headerShown: false }}
+            />
+            
+            
            
           </Stack.Navigator>
         ) : null}

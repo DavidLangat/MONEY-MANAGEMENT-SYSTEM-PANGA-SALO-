@@ -108,20 +108,31 @@ JOHN,`}</Text>
         onPress={() => navigation.navigate("Notification1")}
       >
          <Image
-        style={[styles.tabBarIcon2, styles.tabBarIconPosition2]}
+        style={[styles.tabBarIcon3, styles.tabBarIconPosition3]}
         
         
         source={require("../assets/bell.png")}
       />
       </Pressable>
-      <Pressable
-        onPress={() => navigation.navigate("Profile")}
+      
+       <Pressable
+        onPress={() => navigation.navigate("Expense")}
       >
         <Image
-        style={[styles.tabBarIcon3, styles.tabBarIconPosition3]}
+        style={[styles.tabBarIcon2, styles.tabBarIconPosition2]}
         
         
-        source={require("../assets/user.png")}
+        source={require("../assets/expenses.png")}
+      />
+      </Pressable> 
+       <Pressable
+        onPress={() => navigation.navigate("Reports")}
+      >
+        <Image
+        style={[styles.tabBarIcon4, styles.tabBarIconPosition4]}
+        
+        
+        source={require("../assets/report.png")}
       />
       </Pressable>
    
@@ -372,7 +383,7 @@ const styles = StyleSheet.create({
   },
    tabBarIconPosition1: {
     width: 30,
-    left: 50,
+    left: 35,
     position: "absolute",
     
   },
@@ -384,7 +395,7 @@ const styles = StyleSheet.create({
   },
    tabBarIconPosition2: {
     width: 30,
-    left: 175,
+    left: 125,
     position: "absolute",
     
   },
@@ -396,11 +407,24 @@ const styles = StyleSheet.create({
   },
      tabBarIconPosition3: {
     width: 30,
-    right: 50,
+    right: 125,
     position: "absolute",
     
   },
    tabBarIcon3: {
+    top: 730,
+    height: 30,
+    
+    
+  },
+     tabBarIconPosition4: {
+    width: 30,
+    right: 35,
+   
+    position: "absolute",
+    
+  },
+   tabBarIcon4: {
     top: 730,
     height: 30,
     

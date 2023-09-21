@@ -1,12 +1,15 @@
 import * as React from "react";
-import { StyleSheet, View, Image, Text, Pressable } from "react-native";
+import { StyleSheet, View, Image, Text, Pressable,TextInput } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import { Border, Color, FontFamily, FontSize } from "../GlobalStyles";
-
+import  { useState } from 'react';
+import DatePicker from 'react-native-datepicker';
 const Profile = () => {
   const navigation = useNavigation();
-
+  const [category, setCategory] = useState('');
+  const [amount, setAmount] = useState('');
+  const [date, setDate] = useState('');
   return (
     <View style={styles.profile}>
       <LinearGradient
@@ -23,7 +26,7 @@ const Profile = () => {
         useAngle={true}
         angle={191.45}
       />
-<Pressable
+      <Pressable
         
         onPress={() => navigation.navigate("HomePage")}
       >
@@ -66,39 +69,57 @@ const Profile = () => {
         source={require("../assets/report.png")}
       />
       </Pressable>
-      <Text style={[styles.profile1, styles.profile1Clr]}>Profile</Text>
-      <View style={[styles.username, styles.usernameLayout]}>
-        <View style={[styles.username1, styles.usernameLayout]}>
-          <View style={[styles.usernameChild, styles.childBorder]} />
-          <Text style={[styles.username2, styles.profile1Clr]}>Username</Text>
-          <Text style={[styles.sukhMahey, styles.maheyTypo]}>Sukh_Mahey</Text>
-        </View>
-      </View>
+   
+      <Text style={[styles.profile1, styles.profile1Clr]}>Expense Logging</Text>
+    
+         
       <View style={[styles.firstName, styles.usernameLayout]}>
         <View style={[styles.username1, styles.usernameLayout]}>
           <View style={[styles.usernameChild, styles.childBorder]} />
-          <Text style={[styles.username2, styles.profile1Clr]}>First Name</Text>
-          <Text style={[styles.sukhMahey, styles.maheyTypo]}>Sukh</Text>
+          <Text style={[styles.username2, styles.profile1Clr]}>Category</Text>
+          <TextInput
+            style={[styles.sukhMahey, styles.maheyTypo]}
+            value={category}
+            onChangeText={(text) => setCategory(text)}
+          />
         </View>
       </View>
+
       <View style={[styles.lastName, styles.usernameLayout]}>
         <View style={[styles.username1, styles.usernameLayout]}>
           <View style={[styles.usernameChild, styles.childBorder]} />
-          <Text style={[styles.username2, styles.profile1Clr]}>Last Name</Text>
-          <Text style={[styles.sukhMahey, styles.maheyTypo]}>Mahey</Text>
+          <Text style={[styles.username2, styles.profile1Clr]}>Amount</Text>
+          <TextInput
+             style={[styles.sukhMahey, styles.maheyTypo]}
+            value={amount}
+            onChangeText={(text) => setAmount(text)}
+            placeholder="Enter Amount"
+
+          />
           <View style={styles.tick1} />
         </View>
       </View>
+
       <View style={[styles.dob, styles.usernameLayout]}>
         <View style={[styles.username1, styles.usernameLayout]}>
           <View style={[styles.usernameChild, styles.childBorder]} />
-          <Text style={[styles.username2, styles.profile1Clr]}>
-            Date of Birth
-          </Text>
-          <Text style={[styles.sukhMahey, styles.maheyTypo]}>15-12-2077</Text>
+          <Text style={[styles.username2, styles.profile1Clr]}>Select Date</Text>
+          <TextInput
+            style={[styles.sukhMahey, styles.maheyTypo]}
+            
+    
+         date={date}
+        mode="date"
+        placeholder="Select date"
+        format="YYYY-MM-DD"
+        confirmBtnText="Confirm"
+        cancelBtnText="Cancel"
+        onDateChange={(date) => setDate(date)}
+          />
           <View style={styles.tick1} />
         </View>
-      </View>
+      
+    </View>
       <View style={[styles.confirmationButton, styles.confirmationLayout]}>
         <View
           style={[styles.confirmationButtonChild, styles.confirmationLayout]}
@@ -108,7 +129,7 @@ const Profile = () => {
           resizeMode="cover"
           source={require("../assets/mask-group1.png")}
         />
-        <Text style={[styles.signOut, styles.onlineTypo]}>Sign out</Text>
+        <Text style={[styles.signOut, styles.onlineTypo]}>Submit Expense</Text>
       </View>
       <Pressable
         style={styles.page1}
@@ -120,26 +141,7 @@ const Profile = () => {
           source={require("../assets/page-16.png")}
         />
       </Pressable>
-      <View style={[styles.profileInfo, styles.profileInfoLayout]}>
-        <View style={[styles.imageOnline, styles.profileInfoLayout]}>
-          <Image
-            style={styles.whiteIcon}
-            resizeMode="cover"
-            source={require("../assets/white.png")}
-          />
-          <Image
-            style={styles.imageOnlineChild}
-            resizeMode="cover"
-            source={require("../assets/ellipse-6.png")}
-          />
-        </View>
-        <View style={styles.sukhbirMaheyParent}>
-          <Text style={[styles.sukhbirMahey, styles.maheyTypo]}>
-            Sukhbir Mahey
-          </Text>
-          <Text style={[styles.online, styles.onlineTypo]}>Online</Text>
-        </View>
-      </View>
+      
       <View style={styles.profileChild} />
     </View>
   );
@@ -273,7 +275,7 @@ const styles = StyleSheet.create({
     height: 110,
   },
   profile1: {
-    top: 35,
+    top: 70,
     fontSize: 40,
     fontWeight: "700",
     fontFamily: FontFamily.montserratBold,
@@ -306,7 +308,7 @@ const styles = StyleSheet.create({
     left: 30,
   },
   firstName: {
-    top: 335,
+    top: 230,
     left: 30,
   },
   tick1: {
@@ -318,11 +320,11 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   lastName: {
-    top: 430,
+    top: 330,
     left: 30,
   },
   dob: {
-    top: 530,
+    top: 450,
     left: 30,
   },
   confirmationButtonChild: {
@@ -346,7 +348,7 @@ const styles = StyleSheet.create({
     left: 30,
   },
   confirmationButton: {
-    top: 644,
+    top: 580,
     left: 29,
     width: 317,
     height: 52,
@@ -359,8 +361,8 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   page1: {
-    left: "76%",
-    top: "84.16%",
+    left: "75%",
+    top: "76.16%",
     right: "18.57%",
     bottom: "16.14%",
     width: "5.43%",
@@ -425,6 +427,42 @@ const styles = StyleSheet.create({
     height: 812,
     overflow: "hidden",
     width: "100%",
+  },
+  tabBarIconPosition1: {
+    width: 30,
+    left: 50,
+    position: "absolute",
+    
+  },
+   tabBarIcon1: {
+    top: 730,
+    height: 30,
+    
+    
+  },
+   tabBarIconPosition2: {
+    width: 30,
+    left: 175,
+    position: "absolute",
+    
+  },
+   tabBarIcon2: {
+    top: 730,
+    height: 30,
+    
+    
+  },
+     tabBarIconPosition3: {
+    width: 30,
+    right: 50,
+    position: "absolute",
+    
+  },
+   tabBarIcon3: {
+    top: 730,
+    height: 30,
+    
+    
   },
    tabBarIconPosition1: {
     width: 30,

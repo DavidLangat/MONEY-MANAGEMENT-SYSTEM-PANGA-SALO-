@@ -58,7 +58,7 @@ const SignIn = () => {
       </Text>
       <Pressable
         style={[styles.signinButton, styles.signinLayout]}
-        onPress={() => navigation.navigate("Otp")}
+        onPress={() => navigation.navigate("HomePage")}
       >
         <LinearGradient
           style={[styles.signinButtonChild, styles.signinLayout]}
