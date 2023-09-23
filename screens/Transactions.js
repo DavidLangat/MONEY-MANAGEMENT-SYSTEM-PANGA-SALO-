@@ -29,7 +29,7 @@ const Transactions = () => {
             <Text style={[styles.shopping1, styles.timeClr]}>Shopping</Text>
             <Text style={styles.march2021820}>15 march 2021, 8:20 PM</Text>
           </View>
-          <Text style={[styles.text, styles.textTypo]}>-$120</Text>
+          <Text style={[styles.text, styles.textTypo]}>-KSh.120</Text>
           <Image
             style={[styles.shoppingIcon, styles.sportsLayout]}
             resizeMode="cover"
@@ -46,7 +46,7 @@ const Transactions = () => {
             <Text style={[styles.shopping1, styles.timeClr]}>Shopping</Text>
             <Text style={styles.march2021820}>7 march 2021, 3:00 PM</Text>
           </View>
-          <Text style={[styles.text1, styles.textTypo]}>-$600</Text>
+          <Text style={[styles.text, styles.textTypo]}>-KSH.600</Text>
           <Image
             style={[styles.shoppingIcon, styles.sportsLayout]}
             resizeMode="cover"
@@ -63,7 +63,7 @@ const Transactions = () => {
             <Text style={[styles.shopping1, styles.timeClr]}>Travel</Text>
             <Text style={styles.march2021820}>7 march 2021, 12:10 PM</Text>
           </View>
-          <Text style={[styles.text2, styles.textTypo]}>-$350</Text>
+          <Text style={[styles.text, styles.textTypo]}>-KSH.350</Text>
           <Image
             style={[styles.shoppingIcon, styles.sportsLayout]}
             resizeMode="cover"
@@ -85,7 +85,7 @@ const Transactions = () => {
             <Text style={[styles.shopping1, styles.timeClr]}>Medicine</Text>
             <Text style={styles.march2021820}>13 march 2021, 6:50 AM</Text>
           </View>
-          <Text style={[styles.text3, styles.textTypo]}>-$80.96</Text>
+          <Text style={[styles.text, styles.textTypo]}>-KSH.80.96</Text>
           <Image
             style={[styles.shoppingIcon, styles.sportsLayout]}
             resizeMode="cover"
@@ -107,7 +107,7 @@ const Transactions = () => {
             <Text style={[styles.shopping1, styles.timeClr]}>Sports</Text>
             <Text style={styles.march2021820}>10 march 2021, 4:20 PM</Text>
           </View>
-          <Text style={[styles.text4, styles.textTypo]}>-$99.99</Text>
+          <Text style={[styles.text, styles.textTypo]}>-KSH.99.99</Text>
           <Image
             style={[styles.shoppingIcon, styles.sportsLayout]}
             resizeMode="cover"
@@ -124,12 +124,12 @@ const Transactions = () => {
             source={require("../assets/sport-1.png")}
           />
         </View>
-        <View style={[styles.sports2, styles.sportsLayout]}>
-          <View style={[styles.shoppingDetails5, styles.shoppingPosition]}>
+        <View style={[styles.sports2]}>
+          <View style={[ styles.shoppingPosition]}>
             <Text style={[styles.shopping1, styles.timeClr]}>Sports</Text>
             <Text style={styles.march2021820}>5 march 2021, 1:20 PM</Text>
           </View>
-          <Text style={[styles.text5, styles.textTypo]}>-$299.37</Text>
+          <Text style={[styles.text, styles.textTypo]}>-KSH.299.37</Text>
           <Image
             style={[styles.shoppingIcon, styles.sportsLayout]}
             resizeMode="cover"
@@ -150,7 +150,7 @@ const Transactions = () => {
       
       <View style={[styles.navigationBar, styles.travel1IconLayout]}>
         <Text style={[styles.transactions2, styles.text6FlexBox]}>
-          Transactions
+       Expense History 
         </Text>
         <Image
           style={[styles.navArrow2Icon, styles.timePosition]}
@@ -159,17 +159,10 @@ const Transactions = () => {
         />
       </View>
       <Text style={[styles.yourTotalExpenses, styles.text6FlexBox]}>
-        Your total Expenses
+        Your total Income used:
       </Text>
-      <Text style={[styles.text6, styles.text6FlexBox]}>$1063.30</Text>
-      <Pressable
-        style={[styles.rectanglePressable, styles.text6FlexBox]}
-        onPress={() => navigation.navigate("TransactionsDetail")}
-      >
-        <Text style={[]}>
-       View Transaction Details here
-      </Text>
-      </Pressable>
+      <Text style={[styles.text6, styles.text6FlexBox]}>KSH.1063.30</Text>
+     
       <View style={[styles.searchBar, styles.searchLayout]}>
         <View style={[styles.searchBarChild, styles.searchLayout]} />
         <Text style={[styles.search, styles.text6FlexBox]}>Search</Text>
@@ -279,7 +272,7 @@ const styles = StyleSheet.create({
     width: 137,
   },
   text: {
-    left: 268,
+    left: 230,
   },
   shoppingIcon: {
     width: 48,
@@ -387,24 +380,7 @@ const styles = StyleSheet.create({
     left: "92.59%",
     position: "absolute",
   },
-  wifiIcon: {
-    height: "61.11%",
-    width: "4.67%",
-    top: "24.06%",
-    right: "8.94%",
-    bottom: "14.83%",
-    left: "86.39%",
-    position: "absolute",
-  },
-  cellularConnectionIcon: {
-    height: "59.26%",
-    width: "5.18%",
-    top: "25.93%",
-    right: "15.13%",
-    bottom: "14.82%",
-    left: "79.69%",
-    position: "absolute",
-  },
+ 
   time: {
     fontSize: FontSize.size_mini,
     fontFamily: FontFamily.robotoRegular,

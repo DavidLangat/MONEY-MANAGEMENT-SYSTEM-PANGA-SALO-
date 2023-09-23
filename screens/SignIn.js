@@ -1,11 +1,14 @@
 import * as React from "react";
-import { Image, StyleSheet, Text, View, Pressable } from "react-native";
+import { Image, StyleSheet, Text, View, Pressable,TextInput } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import { FontSize, FontFamily, Color, Border } from "../GlobalStyles";
+import  { useState } from 'react';
 
 const SignIn = () => {
   const navigation = useNavigation();
+  const [email, setemail] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
     <View style={styles.signIn}>
@@ -27,9 +30,12 @@ const SignIn = () => {
           <Text style={[styles.emailAddress2, styles.emailAddress2Typo]}>
             Email Address
           </Text>
-          <Text style={[styles.sukhbirdesigncom, styles.emailAddress2Typo]}>
-            Sukhbir@design.com
-          </Text>
+          <TextInput
+           style={[styles.name, styles.nameTypo]}
+            value={email}
+            onChangeText={(text) => setemail(text)}
+            placeholder="Enter your Email"
+          />
           <Image
             style={[styles.tick1Icon, styles.iconPosition]}
             resizeMode="cover"
@@ -43,9 +49,12 @@ const SignIn = () => {
           <Text style={[styles.emailAddress2, styles.emailAddress2Typo]}>
             Password
           </Text>
-          <Text style={[styles.sukhbirdesigncom, styles.emailAddress2Typo]}>
-            1234554321
-          </Text>
+         <TextInput
+           style={[styles.name, styles.nameTypo]}
+            value={password}
+            onChangeText={(text) => setPassword(text)}
+            placeholder="Enter your Password"
+          />
         </View>
         <Image
           style={[styles.eye1Icon, styles.iconPosition]}
@@ -89,6 +98,17 @@ const SignIn = () => {
 };
 
 const styles = StyleSheet.create({
+  name: {
+    top: 24,
+    fontSize: FontSize.size_sm,
+  },
+   nameTypo: {
+    color: Color.colorMediumblue_200,
+    fontFamily: FontFamily.sFProText,
+    textAlign: "left",
+    left: 0,
+    position: "absolute",
+  },
   signIn1Typo: {
     textAlign: "left",
     fontSize: FontSize.size_7xl,

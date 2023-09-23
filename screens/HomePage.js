@@ -22,7 +22,7 @@ const HomePage = () => {
         <Image
           style={styles.whiteIcon}
           resizeMode="cover"
-          source={require("../assets/white9.png")}
+          source={require("../assets/user.png")}
         />
         <Image
           style={styles.imageOnlineChild}
@@ -44,7 +44,7 @@ const HomePage = () => {
       
       <Pressable
         style={[styles.bankAccountsCard, styles.bankCardLayout]}
-        onPress={() => navigation.navigate("Cards")}
+        onPress={() => navigation.navigate("TransactionsDetail")}
       >
         <LinearGradient
           style={[styles.bankAccountsCardChild, styles.cardChildShadowBox]}
@@ -59,7 +59,7 @@ const HomePage = () => {
           source={require("../assets/mask-group9.png")}
         />
         <Text style={[styles.checkYourAccount, styles.yourTypo]}>
-          Check your account balance
+          Check your Expense balance
         </Text>
         <Image
           style={[styles.smallArrow1, styles.imageOnlinePosition]}
@@ -74,7 +74,7 @@ JOHN,`}</Text>
         <Text style={[styles.yourAccountBalance, styles.yourTypo]}>
           Your account balance
         </Text>
-        <Text style={[styles.text, styles.timeFlexBox]}>$8900.00</Text>
+        <Text style={[styles.text, styles.timeFlexBox]}>KSH.8900.00</Text>
         <Image
           style={styles.more1Icon}
           resizeMode="cover"
@@ -205,16 +205,16 @@ const styles = StyleSheet.create({
     margin:5,
   },
   whiteIcon: {
-    top: -7,
-    left: -11,
-    borderRadius: 18,
-    width: 72,
-    height: 72,
+    top: 5,
+    left: -1,
+    borderRadius: 10,
+    width: 40,
+    height: 40,
     position: "absolute",
   },
   imageOnlineChild: {
-    top: 41,
-    left: 40,
+    top: 33,
+    left: 28,
     width: 10,
     height: 9,
     position: "absolute",

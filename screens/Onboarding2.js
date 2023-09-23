@@ -19,10 +19,10 @@ const Onboarding2 = () => {
         source={require("../assets/ellipse-10.png")}
       />
       <Text style={[styles.enjoyCommissionFreeStock, styles.getStartedFlexBox]}>
-        Enjoy Commission-free stock trading.
+        Enjoy managing your own money.
       </Text>
       <Text style={[styles.onlineInvestingHas, styles.getStartedFlexBox]}>
-        Online investing has never been easier than it is right now.
+        Online financing has never been easier than it is right now.
       </Text>
       <View style={styles.indicators}>
         <Image
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     width: "84%",
     top: "60.1%",
     fontSize: FontSize.size_5xl,
-    lineHeight: 36,
+    lineHeight: 30,
     fontWeight: "700",
     fontFamily: FontFamily.montserratBold,
     color: Color.colorMediumblue_200,

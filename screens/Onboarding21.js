@@ -19,10 +19,10 @@ const Onboarding21 = () => {
         source={require("../assets/ellipse-10.png")}
       />
       <Text style={[styles.secureYourMoney, styles.nextFlexBox]}>
-        Secure your money for free and get rewards
+        Secure your money for free 
       </Text>
       <Text style={[styles.getTheMost, styles.nextFlexBox]}>
-        Get the most secure paymet app ever and enjoy it.
+        Get the most secure finance app ever and enjoy it.
       </Text>
       <View style={styles.indicators}>
         <Image

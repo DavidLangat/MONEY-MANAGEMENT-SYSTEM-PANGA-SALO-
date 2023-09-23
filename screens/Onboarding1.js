@@ -28,7 +28,7 @@ const Onboarding1 = () => {
       </Text>
       <Text
         style={[styles.get5Cashback, styles.nextFlexBox]}
-      >{`Get 5% cashback for each transaction and spend it easily `}</Text>
+      >{`Track and spend your money wisely `}</Text>
       <View style={styles.indicators}>
         <View style={styles.indicatorsChild} />
         <View style={[styles.indicatorsItem, styles.indicatorsLayout]} />
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     width: "70.67%",
     top: "60.1%",
     fontSize: FontSize.size_5xl,
-    lineHeight: 36,
+    lineHeight: 30,
     fontWeight: "700",
     fontFamily: FontFamily.montserratBold,
     color: Color.colorMediumblue_200,

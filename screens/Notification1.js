@@ -23,22 +23,34 @@ const Notification1 = () => {
         onPress={() => navigation.navigate("Notification1")}
       >
          <Image
-        style={[styles.tabBarIcon2, styles.tabBarIconPosition2]}
+        style={[styles.tabBarIcon3, styles.tabBarIconPosition3]}
         
         
         source={require("../assets/bell.png")}
       />
       </Pressable>
-      <Pressable
-        onPress={() => navigation.navigate("Profile")}
+      
+       <Pressable
+        onPress={() => navigation.navigate("Expense")}
       >
         <Image
-        style={[styles.tabBarIcon3, styles.tabBarIconPosition3]}
+        style={[styles.tabBarIcon2, styles.tabBarIconPosition2]}
         
         
-        source={require("../assets/user.png")}
+        source={require("../assets/expenses.png")}
+      />
+      </Pressable> 
+       <Pressable
+        onPress={() => navigation.navigate("Reports")}
+      >
+        <Image
+        style={[styles.tabBarIcon4, styles.tabBarIconPosition4]}
+        
+        
+        source={require("../assets/report.png")}
       />
       </Pressable>
+   
       <View style={[styles.searchBar, styles.searchLayout]}>
         <View style={[styles.searchBarChild, styles.searchLayout]} />
         <Text style={styles.search}>Search</Text>
@@ -49,27 +61,26 @@ const Notification1 = () => {
         />
       </View>
       <Text style={[styles.youCanCheck, styles.timeFlexBox]}>
-        You can check your expenses here
+        You can check your Activity
+         here:
       </Text>
       <View style={[styles.message, styles.messageLayout]}>
-        <View style={[styles.profileImage, styles.profileImagePosition]}>
-          <Image
-            style={[styles.whiteIcon, styles.iconLayout]}
+        <Image
+            style={[styles.shoppingIcon, styles.sportsLayout]}
             resizeMode="cover"
-            source={require("../assets/white1.png")}
+            source={require("../assets/shopping-icon3.png")}
           />
           <Image
-            style={[styles.profileImageChild, styles.profileImageChildPosition]}
+            style={[styles.sport1Icon, styles.iconPosition]}
             resizeMode="cover"
-            source={require("../assets/ellipse-61.png")}
+            source={require("../assets/sport-1.png")}
           />
-        </View>
         <View style={[styles.theresaWebbParent, styles.profileImagePosition]}>
           <Text style={[styles.theresaWebb, styles.sentYou99Typo]}>
-            Theresa Webb
+            Shopping
           </Text>
           <Text style={[styles.sentYou99, styles.sentYou99Typo]}>
-            Sent you $99. Happy Birthday
+            You used KSH.300 on shopping
           </Text>
         </View>
         <Image
@@ -80,24 +91,24 @@ const Notification1 = () => {
         <View style={styles.messageChild} />
       </View>
       <View style={[styles.message1, styles.messageLayout]}>
-        <View style={[styles.profileImage, styles.profileImagePosition]}>
+        
           <Image
-            style={[styles.whiteIcon, styles.iconLayout]}
+            style={[styles.shoppingIcon, styles.sportsLayout]}
             resizeMode="cover"
-            source={require("../assets/white2.png")}
+            source={require("../assets/shopping-icon3.png")}
           />
           <Image
-            style={[styles.profileImageChild, styles.profileImageChildPosition]}
+            style={[styles.sport1Icon, styles.iconPosition]}
             resizeMode="cover"
-            source={require("../assets/ellipse-62.png")}
+            source={require("../assets/sport-1.png")}
           />
-        </View>
+        
         <View style={[styles.theresaWebbParent, styles.profileImagePosition]}>
           <Text style={[styles.theresaWebb, styles.sentYou99Typo]}>
-            Guy Hawkins
+            Sports
           </Text>
           <Text style={[styles.sentYou99, styles.sentYou99Typo]}>
-            Sent you $99. Happy Birthday
+            You used KSH.400 on sports
           </Text>
         </View>
         <Image
@@ -107,125 +118,36 @@ const Notification1 = () => {
         />
         <View style={styles.messageChild} />
       </View>
-      <View style={[styles.message2, styles.messageLayout]}>
-        <View style={[styles.profileImage, styles.profileImagePosition]}>
-          <Image
-            style={[styles.whiteIcon, styles.iconLayout]}
-            resizeMode="cover"
-            source={require("../assets/white3.png")}
-          />
-          <Image
-            style={[styles.profileImageChild, styles.profileImageChildPosition]}
-            resizeMode="cover"
-            source={require("../assets/ellipse-63.png")}
-          />
-        </View>
-        <View style={[styles.theresaWebbParent, styles.profileImagePosition]}>
-          <Text style={[styles.theresaWebb, styles.sentYou99Typo]}>
-            Jane Cooper
-          </Text>
-          <Text style={[styles.sentYou99, styles.sentYou99Typo]}>
-            Sent you $99. Happy Birthday
-          </Text>
-        </View>
-        <Image
-          style={[styles.smallArrow4, styles.iconLayout]}
-          resizeMode="cover"
-          source={require("../assets/small-arrow-4.png")}
-        />
-        <View style={styles.messageChild} />
-      </View>
-      <View style={[styles.message3, styles.messageLayout]}>
-        <View style={[styles.profileImage, styles.profileImagePosition]}>
-          <Image
-            style={[styles.whiteIcon, styles.iconLayout]}
-            resizeMode="cover"
-            source={require("../assets/white4.png")}
-          />
-          <Image
-            style={[styles.profileImageChild, styles.profileImageChildPosition]}
-            resizeMode="cover"
-            source={require("../assets/ellipse-61.png")}
-          />
-        </View>
-        <View style={[styles.theresaWebbParent, styles.profileImagePosition]}>
-          <Text style={[styles.theresaWebb, styles.sentYou99Typo]}>
-            Arlene McCoy
-          </Text>
-          <Text style={[styles.sentYou99, styles.sentYou99Typo]}>
-            Sent you $99. Happy Birthday
-          </Text>
-        </View>
-        <Image
-          style={[styles.smallArrow4, styles.iconLayout]}
-          resizeMode="cover"
-          source={require("../assets/small-arrow-4.png")}
-        />
-        <View style={styles.messageChild} />
-      </View>
-      <View style={[styles.message4, styles.messageLayout]}>
-        <View style={[styles.profileImage, styles.profileImagePosition]}>
-          <Image
-            style={[styles.whiteIcon, styles.iconLayout]}
-            resizeMode="cover"
-            source={require("../assets/white5.png")}
-          />
-          <Image
-            style={[styles.profileImageChild, styles.profileImageChildPosition]}
-            resizeMode="cover"
-            source={require("../assets/ellipse-63.png")}
-          />
-        </View>
-        <View style={[styles.theresaWebbParent, styles.profileImagePosition]}>
-          <Text style={[styles.theresaWebb, styles.sentYou99Typo]}>
-            Courtney Henry
-          </Text>
-          <Text style={[styles.sentYou99, styles.sentYou99Typo]}>
-            Sent you $99. Happy Birthday
-          </Text>
-        </View>
-        <Image
-          style={[styles.smallArrow4, styles.iconLayout]}
-          resizeMode="cover"
-          source={require("../assets/small-arrow-4.png")}
-        />
-        <View style={styles.messageChild} />
-      </View>
-      <View style={[styles.message5, styles.messageLayout]}>
-        <View style={[styles.profileImage, styles.profileImagePosition]}>
-          <Image
-            style={[styles.whiteIcon, styles.iconLayout]}
-            resizeMode="cover"
-            source={require("../assets/white6.png")}
-          />
-          <Image
-            style={[styles.profileImageChild, styles.profileImageChildPosition]}
-            resizeMode="cover"
-            source={require("../assets/ellipse-61.png")}
-          />
-        </View>
-        <View style={[styles.theresaWebbParent, styles.profileImagePosition]}>
-          <Text style={[styles.theresaWebb, styles.sentYou99Typo]}>
-            Dianne Russell
-          </Text>
-          <Text style={[styles.sentYou99, styles.sentYou99Typo]}>
-            Sent you $99. Happy Birthday
-          </Text>
-        </View>
-        <Image
-          style={[styles.smallArrow4, styles.iconLayout]}
-          resizeMode="cover"
-          source={require("../assets/small-arrow-4.png")}
-        />
-        <View style={styles.messageChild} />
-      </View>
+    
+   
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+ 
+ 
+  shoppingIcon: {
+    width: 48,
+    top: 0,
+    left: 0,
+  },
+   sportsLayout: {
+    height: 48,
+    
+  },
+  sport1Icon: {
+    left: 10,
+    width: 28,
+    height: 16,
+  },
+    iconPosition: {
+    top: 16,
+    position: "absolute",
+    overflow: "hidden",
+  },
   light1Position: {
-    width: 375,
+    width: 305,
     left: 0,
     position: "absolute",
   },
@@ -238,10 +160,7 @@ const styles = StyleSheet.create({
     bottom: "0%",
     position: "absolute",
   },
-  timeFlexBox: {
-    textAlign: "left",
-    position: "absolute",
-  },
+ 
   searchLayout: {
     height: 53,
     width: 315,
@@ -265,34 +184,7 @@ const styles = StyleSheet.create({
     left: "0%",
     position: "absolute",
   },
-  batteryIcon: {
-    height: "62.96%",
-    width: "7.41%",
-    top: "24.07%",
-    bottom: "12.96%",
-    left: "92.59%",
-    right: "0%",
-    maxWidth: "100%",
-    position: "absolute",
-  },
-  wifiIcon: {
-    height: "61.11%",
-    width: "4.67%",
-    top: "24.06%",
-    right: "8.94%",
-    bottom: "14.83%",
-    left: "86.39%",
-    position: "absolute",
-  },
-  cellularConnectionIcon: {
-    height: "59.26%",
-    width: "5.18%",
-    top: "25.93%",
-    right: "15.13%",
-    bottom: "14.82%",
-    left: "79.69%",
-    position: "absolute",
-  },
+
   time: {
     fontSize: FontSize.size_mini,
     fontFamily: FontFamily.robotoRegular,
@@ -357,7 +249,7 @@ const styles = StyleSheet.create({
     left: 30,
   },
   youCanCheck: {
-    top: 105,
+    top: 130,
     fontSize: FontSize.size_3xl,
     fontWeight: "700",
     fontFamily: FontFamily.montserratBold,
@@ -387,7 +279,7 @@ const styles = StyleSheet.create({
   },
   profileImage: {
     width: "12.7%",
-    right: "87.3%",
+    right: "80.3%",
     left: "0%",
   },
   theresaWebb: {
@@ -403,7 +295,7 @@ const styles = StyleSheet.create({
   theresaWebbParent: {
     width: "75.24%",
     right: "9.52%",
-    left: "15.24%",
+    left: "19.24%",
   },
   smallArrow4: {
     height: "21.43%",
@@ -433,18 +325,6 @@ const styles = StyleSheet.create({
   message1: {
     top: 312,
   },
-  message2: {
-    top: 384,
-  },
-  message3: {
-    top: 456,
-  },
-  message4: {
-    top: 528,
-  },
-  message5: {
-    top: 600,
-  },
   notification: {
     backgroundColor: Color.colorWhite,
     flex: 1,
@@ -453,7 +333,7 @@ const styles = StyleSheet.create({
   },
    tabBarIconPosition1: {
     width: 30,
-    left: 50,
+    left: 35,
     position: "absolute",
     
   },
@@ -465,7 +345,7 @@ const styles = StyleSheet.create({
   },
    tabBarIconPosition2: {
     width: 30,
-    left: 175,
+    left: 125,
     position: "absolute",
     
   },
@@ -477,11 +357,24 @@ const styles = StyleSheet.create({
   },
      tabBarIconPosition3: {
     width: 30,
-    right: 50,
+    right: 125,
     position: "absolute",
     
   },
    tabBarIcon3: {
+    top: 730,
+    height: 30,
+    
+    
+  },
+     tabBarIconPosition4: {
+    width: 30,
+    right: 35,
+   
+    position: "absolute",
+    
+  },
+   tabBarIcon4: {
     top: 730,
     height: 30,
     

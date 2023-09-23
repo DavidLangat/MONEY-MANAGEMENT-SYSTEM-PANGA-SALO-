@@ -1,11 +1,19 @@
 import * as React from "react";
-import { StyleSheet, View, Image, Text, Pressable } from "react-native";
+import { StyleSheet, View, Image, Text, Pressable,TextInput } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import { Border, Color, FontFamily, FontSize } from "../GlobalStyles";
-
+import  { useState } from 'react';
+import DatePicker from 'react-native-datepicker';
 const Profile = () => {
   const navigation = useNavigation();
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
+  const [email, setEmail] = useState('');
+
+  
+  
+
 
   return (
     <View style={styles.profile}>
@@ -23,7 +31,74 @@ const Profile = () => {
         useAngle={true}
         angle={191.45}
       />
-<Pressable
+     
+   
+      <Text style={[styles.profile1, styles.profile1Clr]}>Profile</Text>
+    
+         
+      <View style={[styles.firstName, styles.usernameLayout]}>
+        <View>
+          <View style={[styles.usernameChild, styles.childBorder]} />
+          <Text style={[styles.username2, styles.profile1Clr]}>FirstName</Text>
+          <TextInput
+            style={[styles.name, styles.nameTypo]}
+            value={firstname}
+            onChangeText={(text) => setFirstname(text)}
+            placeholder="John "
+          />
+        </View>
+      </View>
+
+      <View style={[styles.lastName, styles.usernameLayout]}>
+        <View style={[styles.username1, styles.usernameLayout]}>
+          <View style={[styles.usernameChild, styles.childBorder]} />
+          <Text style={[styles.username2, styles.profile1Clr]}>LastName</Text>
+          <TextInput
+             style={[styles.name, styles.nameTypo]}
+            value={lastname}
+            onChangeText={(text) => setLastname(text)}
+            placeholder="Doe"
+
+          />
+          <View style={styles.tick1} />
+        </View>
+      </View>
+
+      <View style={[styles.dob, styles.usernameLayout]}>
+        <View style={[styles.username1, styles.usernameLayout]}>
+          <View style={[styles.usernameChild, styles.childBorder]} />
+          <Text style={[styles.username2, styles.profile1Clr]}>Email</Text>
+          <TextInput
+           style={[styles.name, styles.nameTypo]}
+            value={email}
+            onChangeText={(text) => setEmail(text)}
+            placeholder="JohnDoe@gmail.com"
+          />
+          <View style={styles.tick1} />
+        </View>
+      
+    </View>
+    
+    <Pressable
+ 
+    onPress={() => navigation.navigate("Onboarding1")}>
+      <View style={[styles.confirmationButton, styles.confirmationLayout]}>
+        <View
+          style={[styles.confirmationButtonChild, styles.confirmationLayout]}
+        />
+        <Image
+          style={[styles.maskGroupIcon, styles.confirmationLayout]}
+          resizeMode="cover"
+          source={require("../assets/mask-group1.png")}
+        />
+        <Text style={[styles.signOut, styles.onlineTypo]}>Sign Out</Text>
+      </View>
+      
+      
+      </Pressable>
+      
+      <View style={styles.profileChild} />
+      <Pressable
         
         onPress={() => navigation.navigate("HomePage")}
       >
@@ -66,81 +141,7 @@ const Profile = () => {
         source={require("../assets/report.png")}
       />
       </Pressable>
-      <Text style={[styles.profile1, styles.profile1Clr]}>Profile</Text>
-      <View style={[styles.username, styles.usernameLayout]}>
-        <View style={[styles.username1, styles.usernameLayout]}>
-          <View style={[styles.usernameChild, styles.childBorder]} />
-          <Text style={[styles.username2, styles.profile1Clr]}>Username</Text>
-          <Text style={[styles.sukhMahey, styles.maheyTypo]}>Sukh_Mahey</Text>
-        </View>
-      </View>
-      <View style={[styles.firstName, styles.usernameLayout]}>
-        <View style={[styles.username1, styles.usernameLayout]}>
-          <View style={[styles.usernameChild, styles.childBorder]} />
-          <Text style={[styles.username2, styles.profile1Clr]}>First Name</Text>
-          <Text style={[styles.sukhMahey, styles.maheyTypo]}>Sukh</Text>
-        </View>
-      </View>
-      <View style={[styles.lastName, styles.usernameLayout]}>
-        <View style={[styles.username1, styles.usernameLayout]}>
-          <View style={[styles.usernameChild, styles.childBorder]} />
-          <Text style={[styles.username2, styles.profile1Clr]}>Last Name</Text>
-          <Text style={[styles.sukhMahey, styles.maheyTypo]}>Mahey</Text>
-          <View style={styles.tick1} />
-        </View>
-      </View>
-      <View style={[styles.dob, styles.usernameLayout]}>
-        <View style={[styles.username1, styles.usernameLayout]}>
-          <View style={[styles.usernameChild, styles.childBorder]} />
-          <Text style={[styles.username2, styles.profile1Clr]}>
-            Date of Birth
-          </Text>
-          <Text style={[styles.sukhMahey, styles.maheyTypo]}>15-12-2077</Text>
-          <View style={styles.tick1} />
-        </View>
-      </View>
-      <View style={[styles.confirmationButton, styles.confirmationLayout]}>
-        <View
-          style={[styles.confirmationButtonChild, styles.confirmationLayout]}
-        />
-        <Image
-          style={[styles.maskGroupIcon, styles.confirmationLayout]}
-          resizeMode="cover"
-          source={require("../assets/mask-group1.png")}
-        />
-        <Text style={[styles.signOut, styles.onlineTypo]}>Sign out</Text>
-      </View>
-      <Pressable
-        style={styles.page1}
-        onPress={() => navigation.navigate("Onboarding1")}
-      >
-        <Image
-          style={styles.icon}
-          resizeMode="cover"
-          source={require("../assets/page-16.png")}
-        />
-      </Pressable>
-      <View style={[styles.profileInfo, styles.profileInfoLayout]}>
-        <View style={[styles.imageOnline, styles.profileInfoLayout]}>
-          <Image
-            style={styles.whiteIcon}
-            resizeMode="cover"
-            source={require("../assets/white.png")}
-          />
-          <Image
-            style={styles.imageOnlineChild}
-            resizeMode="cover"
-            source={require("../assets/ellipse-6.png")}
-          />
-        </View>
-        <View style={styles.sukhbirMaheyParent}>
-          <Text style={[styles.sukhbirMahey, styles.maheyTypo]}>
-            Sukhbir Mahey
-          </Text>
-          <Text style={[styles.online, styles.onlineTypo]}>Online</Text>
-        </View>
-      </View>
-      <View style={styles.profileChild} />
+   
     </View>
   );
 };
@@ -183,7 +184,7 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     left: 0,
   },
-  maheyTypo: {
+  nameTypo: {
     color: Color.colorMediumblue_200,
     fontFamily: FontFamily.sFProText,
     textAlign: "left",
@@ -273,16 +274,16 @@ const styles = StyleSheet.create({
     height: 110,
   },
   profile1: {
-    top: 35,
+    top: 70,
     fontSize: 40,
     fontWeight: "700",
     fontFamily: FontFamily.montserratBold,
     left: 30,
   },
   usernameChild: {
-    top: 58,
+    top: 70,
     borderColor: Color.colorLavender,
-    borderTopWidth: 1,
+    borderTopWidth: 7,
     width: 316,
     height: 1,
     position: "absolute",
@@ -293,7 +294,7 @@ const styles = StyleSheet.create({
     left: 0,
     top: 0,
   },
-  sukhMahey: {
+  name: {
     top: 33,
     fontSize: FontSize.size_sm,
   },
@@ -306,7 +307,7 @@ const styles = StyleSheet.create({
     left: 30,
   },
   firstName: {
-    top: 335,
+    top: 250,
     left: 30,
   },
   tick1: {
@@ -318,12 +319,20 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   lastName: {
-    top: 430,
+    top: 360,
     left: 30,
   },
   dob: {
-    top: 530,
+    top: 450,
     left: 30,
+  },
+  pass:{
+    top:470,
+    left:30
+  },
+  pass1:{
+    top:580,
+    left:30
   },
   confirmationButtonChild: {
     borderRadius: Border.br_9xl,
@@ -343,10 +352,10 @@ const styles = StyleSheet.create({
   signOut: {
     top: 16,
     fontFamily: FontFamily.montserratRegular,
-    left: 30,
+    left: 130,
   },
   confirmationButton: {
-    top: 644,
+    top: 600,
     left: 29,
     width: 317,
     height: 52,
@@ -359,8 +368,8 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   page1: {
-    left: "76%",
-    top: "84.16%",
+    left: "75%",
+    top: "76.16%",
     right: "18.57%",
     bottom: "16.14%",
     width: "5.43%",
@@ -425,6 +434,91 @@ const styles = StyleSheet.create({
     height: 812,
     overflow: "hidden",
     width: "100%",
+  },
+  tabBarIconPosition1: {
+    width: 30,
+    left: 50,
+    position: "absolute",
+    
+  },
+   tabBarIcon1: {
+    top: 730,
+    height: 30,
+    
+    
+  },
+   tabBarIconPosition2: {
+    width: 30,
+    left: 175,
+    position: "absolute",
+    
+  },
+   tabBarIcon2: {
+    top: 730,
+    height: 30,
+    
+    
+  },
+     tabBarIconPosition3: {
+    width: 30,
+    right: 50,
+    position: "absolute",
+    
+  },
+   tabBarIcon3: {
+    top: 730,
+    height: 30,
+    
+    
+  },
+   tabBarIconPosition1: {
+    width: 30,
+    left: 35,
+    position: "absolute",
+    
+  },
+   tabBarIcon1: {
+    top: 730,
+    height: 30,
+    
+    
+  },
+   tabBarIconPosition2: {
+    width: 30,
+    left: 125,
+    position: "absolute",
+    
+  },
+   tabBarIcon2: {
+    top: 730,
+    height: 30,
+    
+    
+  },
+     tabBarIconPosition3: {
+    width: 30,
+    right: 125,
+    position: "absolute",
+    
+  },
+   tabBarIcon3: {
+    top: 730,
+    height: 30,
+    
+    
+  },
+     tabBarIconPosition4: {
+    width: 30,
+    right: 35,
+   
+    position: "absolute",
+    
+  },
+   tabBarIcon4: {
+    top: 730,
+    height: 30,
+    
+    
   },
    tabBarIconPosition1: {
     width: 30,

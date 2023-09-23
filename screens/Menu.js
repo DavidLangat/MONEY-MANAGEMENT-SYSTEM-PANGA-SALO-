@@ -8,11 +8,7 @@ const Menu = () => {
 
   return (
     <View style={styles.menu}>
-      <Image
-        style={styles.homePage1}
-        resizeMode="cover"
-        source={require("../assets/home-page-1.png")}
-      />
+     
       <Pressable
         style={styles.menuChild}
         onPress={() => navigation.navigate("HomePage")}
@@ -22,6 +18,8 @@ const Menu = () => {
         resizeMode="cover"
         source={require("../assets/rectangle-12.png")}
       />
+      <Pressable
+     onPress={() => navigation.navigate("Onboarding1")}>
       <View style={[styles.signOutButton, styles.signLayout]}>
         <View style={[styles.signOutButtonChild, styles.signLayout]} />
         <Text style={styles.signOut}>Sign Out</Text>
@@ -30,13 +28,19 @@ const Menu = () => {
           resizeMode="cover"
           source={require("../assets/log-out-1.png")}
         />
+          <Image
+          style={[styles.maskGroupIcon, styles.confirmationLayout]}
+          resizeMode="cover"
+          source={require("../assets/mask-group1.png")}
+        />
       </View>
+      </Pressable>
       <View style={[styles.profileInfo, styles.profileInfoLayout]}>
         <View style={[styles.imageOnline, styles.profileInfoLayout]}>
           <Image
             style={[styles.whiteIcon, styles.signLayout]}
             resizeMode="cover"
-            source={require("../assets/white9.png")}
+            source={require("../assets/user.png")}
           />
           <Image
             style={styles.imageOnlineChild}
@@ -46,10 +50,10 @@ const Menu = () => {
         </View>
         <View style={styles.sukhbirMaheyParent}>
           <Text style={[styles.sukhbirMahey, styles.maheyPosition]}>
-            Sukhbir Mahey
+           John Doe
           </Text>
           <Text style={[styles.sukhMahey, styles.maheyPosition]}>
-            @sukh_mahey
+            @John
           </Text>
         </View>
       </View>
@@ -65,7 +69,7 @@ const Menu = () => {
             resizeMode="cover"
             source={require("../assets/payments-1.png")}
           />
-          <Text style={[styles.payments1, styles.myCards1Typo]}>Payments</Text>
+          <Text style={[styles.payments1, styles.myCards1Typo]}>Income</Text>
         </View>
         <Image
           style={[styles.smallArrow2, styles.smallLayout]}
@@ -81,7 +85,7 @@ const Menu = () => {
             source={require("../assets/payments-11.png")}
           />
           <Text style={[styles.transactions1, styles.savingsPosition]}>
-            Transactions
+            Track Goals
           </Text>
         </View>
         <Image
@@ -97,7 +101,7 @@ const Menu = () => {
             resizeMode="cover"
             source={require("../assets/payments-12.png")}
           />
-          <Text style={[styles.myCards1, styles.myCards1Typo]}>My Cards</Text>
+          <Text style={[styles.myCards1, styles.myCards1Typo]}>Education</Text>
         </View>
         <Image
           style={[styles.smallArrow22, styles.smallLayout]}
@@ -108,7 +112,7 @@ const Menu = () => {
       <View style={styles.promotions}>
         <View style={styles.promotionsWrapper}>
           <Text style={[styles.promotions1, styles.myCards1Typo]}>
-            Promotions
+             Advisors
           </Text>
         </View>
         <Image
@@ -122,33 +126,26 @@ const Menu = () => {
           source={require("../assets/promotions-1.png")}
         />
       </View>
-      <View style={[styles.savings, styles.savingsPosition]}>
-        <View style={styles.savingsWrapper}>
-          <Text style={[styles.promotions1, styles.myCards1Typo]}>Savings</Text>
-        </View>
-        <Image
-          style={[styles.smallArrow24, styles.smallLayout]}
-          resizeMode="cover"
-          source={require("../assets/small-arrow-2.png")}
-        />
-        <Image
-          style={[styles.savings1Icon, styles.iconPosition]}
-          resizeMode="cover"
-          source={require("../assets/savings-1.png")}
-        />
-      </View>
+     
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+    maskGroupIcon: {
+    width: 321,
+    right:96 ,
+    top: 0,
+  },
+ 
+  
   menuPosition: {
     width: 281,
     left: 0,
     position: "absolute",
   },
   signLayout: {
-    height: 72,
+    height: 50,
     position: "absolute",
   },
   profileInfoLayout: {
@@ -219,7 +216,7 @@ const styles = StyleSheet.create({
     top: 0,
   },
   signOut: {
-    top: 22,
+    top: 12,
     left: 24,
     fontSize: FontSize.size_xl,
     color: Color.colorMediumblue_200,
@@ -230,7 +227,7 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   logOut1: {
-    top: 25,
+    top: 16,
     left: 176,
     width: 21,
     height: 22,
@@ -244,16 +241,17 @@ const styles = StyleSheet.create({
     left: 29,
   },
   whiteIcon: {
-    top: -7,
+    top: 2,
     left: -11,
     borderRadius: 18,
-    width: 72,
+    width: 50,
+    
   },
   imageOnlineChild: {
     top: 41,
-    left: 40,
+    left: 30,
     width: 10,
-    height: 9,
+    height: 8,
     position: "absolute",
   },
   imageOnline: {

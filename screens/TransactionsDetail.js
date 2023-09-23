@@ -21,7 +21,7 @@ const TransactionsDetail = () => {
       />
       <View style={[styles.navigationBar, styles.travel1IconLayout]}>
         <Text style={[styles.transactions, styles.searchTypo1]}>
-          Transactions
+          Expenses
         </Text>
         <Image
           style={[styles.navArrow2Icon, styles.timePosition]}
@@ -30,166 +30,8 @@ const TransactionsDetail = () => {
         />
       </View>
       <Text style={styles.yourTotalExpenses}>Your total Expenses</Text>
-      <Text style={[styles.text, styles.textTypo2]}>$1063.30</Text>
-      <View style={[styles.transactionsCard, styles.transactionsCardLayout]}>
-        <Image
-          style={[styles.transactionsCardChild, styles.transactionsCardLayout]}
-          resizeMode="cover"
-          source={require("../assets/rectangle-18.png")}
-        />
-        <View style={styles.transactions1}>
-          <View style={[styles.shopping, styles.sportsLayout]}>
-            <View style={[styles.shoppingDetails, styles.shoppingPosition]}>
-              <Text style={[styles.shopping1, styles.searchTypo]}>
-                Shopping
-              </Text>
-              <Text style={[styles.march2021820, styles.travel3Position]}>
-                15 march 2021, 8:20 PM
-              </Text>
-            </View>
-            <Text style={[styles.text1, styles.textTypo1]}>-$120</Text>
-            <Image
-              style={[styles.shoppingIcon, styles.sportsLayout]}
-              resizeMode="cover"
-              source={require("../assets/shopping-icon.png")}
-            />
-            <Image
-              style={[styles.smallArrow3, styles.smallLayout]}
-              resizeMode="cover"
-              source={require("../assets/small-arrow-3.png")}
-            />
-          </View>
-          <View style={[styles.shopping2, styles.sportsLayout]}>
-            <View style={[styles.shoppingDetails1, styles.shoppingPosition]}>
-              <Text style={[styles.shopping1, styles.searchTypo]}>
-                Shopping
-              </Text>
-              <Text style={[styles.march2021820, styles.travel3Position]}>
-                7 march 2021, 3:00 PM
-              </Text>
-            </View>
-            <Text style={[styles.text2, styles.textTypo1]}>-$600</Text>
-            <Image
-              style={[styles.shoppingIcon, styles.sportsLayout]}
-              resizeMode="cover"
-              source={require("../assets/shopping-icon.png")}
-            />
-            <Image
-              style={[styles.smallArrow3, styles.smallLayout]}
-              resizeMode="cover"
-              source={require("../assets/small-arrow-3.png")}
-            />
-          </View>
-          <View style={[styles.travel, styles.sportsLayout]}>
-            <View style={[styles.shoppingDetails2, styles.shoppingPosition]}>
-              <Text style={[styles.shopping1, styles.searchTypo]}>Travel</Text>
-              <Text style={[styles.march2021820, styles.travel3Position]}>
-                7 march 2021, 12:10 PM
-              </Text>
-            </View>
-            <Text style={[styles.text3, styles.textTypo1]}>-$350</Text>
-            <Image
-              style={[styles.shoppingIcon, styles.sportsLayout]}
-              resizeMode="cover"
-              source={require("../assets/shopping-icon1.png")}
-            />
-            <Image
-              style={[styles.travel1Icon, styles.travel1IconLayout]}
-              resizeMode="cover"
-              source={require("../assets/travel-1.png")}
-            />
-            <Image
-              style={[styles.smallArrow3, styles.smallLayout]}
-              resizeMode="cover"
-              source={require("../assets/small-arrow-3.png")}
-            />
-          </View>
-          <View style={[styles.medicine, styles.sportsLayout]}>
-            <View style={[styles.shoppingDetails3, styles.shoppingPosition]}>
-              <Text style={[styles.shopping1, styles.searchTypo]}>
-                Medicine
-              </Text>
-              <Text style={[styles.march2021820, styles.travel3Position]}>
-                13 march 2021, 6:50 AM
-              </Text>
-            </View>
-            <Text style={[styles.text4, styles.textTypo1]}>-$80.96</Text>
-            <Image
-              style={[styles.shoppingIcon, styles.sportsLayout]}
-              resizeMode="cover"
-              source={require("../assets/shopping-icon2.png")}
-            />
-            <Image
-              style={[styles.smallArrow3, styles.smallLayout]}
-              resizeMode="cover"
-              source={require("../assets/small-arrow-3.png")}
-            />
-            <Image
-              style={[styles.travel1Icon, styles.travel1IconLayout]}
-              resizeMode="cover"
-              source={require("../assets/medicine-1.png")}
-            />
-          </View>
-          <View style={[styles.sports, styles.sportsLayout]}>
-            <View style={[styles.shoppingDetails4, styles.shoppingPosition]}>
-              <Text style={[styles.shopping1, styles.searchTypo]}>Sports</Text>
-              <Text style={[styles.march2021820, styles.travel3Position]}>
-                10 march 2021, 4:20 PM
-              </Text>
-            </View>
-            <Text style={[styles.text5, styles.textTypo1]}>-$99.99</Text>
-            <Image
-              style={[styles.shoppingIcon, styles.sportsLayout]}
-              resizeMode="cover"
-              source={require("../assets/shopping-icon3.png")}
-            />
-            <Image
-              style={[styles.smallArrow3, styles.smallLayout]}
-              resizeMode="cover"
-              source={require("../assets/small-arrow-3.png")}
-            />
-            <Image
-              style={[styles.sport1Icon, styles.iconPosition]}
-              resizeMode="cover"
-              source={require("../assets/sport-1.png")}
-            />
-          </View>
-          <View style={[styles.sports2, styles.sportsLayout]}>
-            <View style={[styles.shoppingDetails5, styles.shoppingPosition]}>
-              <Text style={[styles.shopping1, styles.searchTypo]}>Sports</Text>
-              <Text style={[styles.march2021820, styles.travel3Position]}>
-                5 march 2021, 1:20 PM
-              </Text>
-            </View>
-            <Text style={[styles.text6, styles.textTypo1]}>-$299.37</Text>
-            <Image
-              style={[styles.shoppingIcon, styles.sportsLayout]}
-              resizeMode="cover"
-              source={require("../assets/shopping-icon3.png")}
-            />
-            <Image
-              style={[styles.smallArrow3, styles.smallLayout]}
-              resizeMode="cover"
-              source={require("../assets/small-arrow-3.png")}
-            />
-            <Image
-              style={[styles.sport1Icon, styles.iconPosition]}
-              resizeMode="cover"
-              source={require("../assets/sport-1.png")}
-            />
-          </View>
-        </View>
-        <View style={[styles.transactionsCardItem, styles.iconPosition]} />
-        <View style={[styles.searchBar, styles.searchLayout]}>
-          <View style={[styles.searchBarChild, styles.searchLayout]} />
-          <Text style={[styles.search, styles.searchTypo]}>Search</Text>
-          <Image
-            style={[styles.search1Icon, styles.iconPosition]}
-            resizeMode="cover"
-            source={require("../assets/search-1.png")}
-          />
-        </View>
-      </View>
+      <Text style={[styles.text, styles.textTypo2]}>KSH.2063.30</Text>
+     
       <Text style={[styles.trackYourExpenses, styles.textTypo2]}>
         Track Your Expenses
       </Text>
@@ -205,7 +47,7 @@ const TransactionsDetail = () => {
           source={require("../assets/mask-group4.png")}
         />
         <Text style={[styles.travel3, styles.text7Position]}>Travel</Text>
-        <Text style={[styles.text7, styles.textTypo]}>$399</Text>
+        <Text style={[styles.text7, styles.textTypo]}>KSH.399</Text>
       </View>
       <View style={[styles.sports4, styles.travelLayout]}>
         <Image
@@ -219,7 +61,7 @@ const TransactionsDetail = () => {
           source={require("../assets/mask-group5.png")}
         />
         <Text style={[styles.sports5, styles.text8Position]}>Sports</Text>
-        <Text style={[styles.text8, styles.text8Position]}>$400</Text>
+        <Text style={[styles.text8, styles.text8Position]}>KSH.400</Text>
       </View>
       <View style={[styles.shopping4, styles.shopping4Position]}>
         <Image
@@ -233,7 +75,7 @@ const TransactionsDetail = () => {
           source={require("../assets/mask-group6.png")}
         />
         <Text style={[styles.shopping5, styles.text9Position]}>Shopping</Text>
-        <Text style={[styles.text9, styles.text9Position]}>$375</Text>
+        <Text style={[styles.text9, styles.text9Position]}>KSH.375</Text>
       </View>
       <View style={[styles.medicine2, styles.shopping4Position]}>
         <Image
@@ -247,11 +89,11 @@ const TransactionsDetail = () => {
           source={require("../assets/mask-group7.png")}
         />
         <Text style={[styles.medicine3, styles.text10Position]}>Medicine</Text>
-        <Text style={[styles.text10, styles.text10Position]}>$80.96</Text>
+        <Text style={[styles.text10, styles.text10Position]}>KSh.800</Text>
       </View>
       <Pressable
         style={[styles.creditCardRepayment, styles.creditCardLayout]}
-        onPress={() => navigation.navigate("Transfer")}
+        onPress={() => navigation.navigate("Transactions")}
       >
         
         <LinearGradient
@@ -266,14 +108,57 @@ const TransactionsDetail = () => {
           resizeMode="cover"
           source={require("../assets/mask-group8.png")}
         />
-        <Text style={styles.creditCardRepayment1}>{`Credit Card
-Repayment`}</Text>
+        <Text style={styles.creditCardRepayment1}>{`View expense history`}</Text>
         <Image
           style={[styles.smallArrow1, styles.smallLayout]}
           resizeMode="cover"
           source={require("../assets/small-arrow-1.png")}
         />
       </Pressable>
+       <Pressable
+        
+        onPress={() => navigation.navigate("HomePage")}
+      >
+        <Image
+        style={[styles.tabBarIcon1, styles.tabBarIconPosition1]}
+        
+        
+        source={require("../assets/home.png")}
+      />
+      </Pressable>
+
+      <Pressable
+        onPress={() => navigation.navigate("Notification1")}
+      >
+         <Image
+        style={[styles.tabBarIcon3, styles.tabBarIconPosition3]}
+        
+        
+        source={require("../assets/bell.png")}
+      />
+      </Pressable>
+      
+       <Pressable
+        onPress={() => navigation.navigate("Expense")}
+      >
+        <Image
+        style={[styles.tabBarIcon2, styles.tabBarIconPosition2]}
+        
+        
+        source={require("../assets/expenses.png")}
+      />
+      </Pressable> 
+       <Pressable
+        onPress={() => navigation.navigate("Reports")}
+      >
+        <Image
+        style={[styles.tabBarIcon4, styles.tabBarIconPosition4]}
+        
+        
+        source={require("../assets/report.png")}
+      />
+      </Pressable>
+   
     </View>
   );
 };
@@ -511,7 +396,7 @@ const styles = StyleSheet.create({
   },
   text: {
     top: 150,
-    left: 130,
+    left: 110,
     fontSize: FontSize.size_9xl,
     textAlign: "center",
     color: Color.colorWhite,
@@ -764,8 +649,8 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   creditCardRepayment1: {
-    top: 29,
-    left: 37,
+    top: 34,
+    left: 20,
     fontSize: FontSize.size_xl,
     width: 182,
     fontFamily: FontFamily.montserratRegular,
@@ -778,7 +663,7 @@ const styles = StyleSheet.create({
     top: 47,
   },
   creditCardRepayment: {
-    top: 558,
+    top: 580,
     left: 30,
   },
   transactionsDetail: {
@@ -787,6 +672,91 @@ const styles = StyleSheet.create({
     height: 812,
     overflow: "hidden",
     backgroundColor: Color.colorWhite,
+  },
+  tabBarIconPosition1: {
+    width: 30,
+    left: 50,
+    position: "absolute",
+    
+  },
+   tabBarIcon1: {
+    top: 730,
+    height: 30,
+    
+    
+  },
+   tabBarIconPosition2: {
+    width: 30,
+    left: 175,
+    position: "absolute",
+    
+  },
+   tabBarIcon2: {
+    top: 730,
+    height: 30,
+    
+    
+  },
+     tabBarIconPosition3: {
+    width: 30,
+    right: 50,
+    position: "absolute",
+    
+  },
+   tabBarIcon3: {
+    top: 730,
+    height: 30,
+    
+    
+  },
+   tabBarIconPosition1: {
+    width: 30,
+    left: 35,
+    position: "absolute",
+    
+  },
+   tabBarIcon1: {
+    top: 730,
+    height: 30,
+    
+    
+  },
+   tabBarIconPosition2: {
+    width: 30,
+    left: 125,
+    position: "absolute",
+    
+  },
+   tabBarIcon2: {
+    top: 730,
+    height: 30,
+    
+    
+  },
+     tabBarIconPosition3: {
+    width: 30,
+    right: 125,
+    position: "absolute",
+    
+  },
+   tabBarIcon3: {
+    top: 730,
+    height: 30,
+    
+    
+  },
+     tabBarIconPosition4: {
+    width: 30,
+    right: 35,
+   
+    position: "absolute",
+    
+  },
+   tabBarIcon4: {
+    top: 730,
+    height: 30,
+    
+    
   },
 });
 

@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Border, Color, FontFamily, FontSize } from "../GlobalStyles";
 import  { useState } from 'react';
 import DatePicker from 'react-native-datepicker';
-const Profile = () => {
+const Expense = () => {
   const navigation = useNavigation();
   const [category, setCategory] = useState('');
   const [amount, setAmount] = useState('');
@@ -74,13 +74,14 @@ const Profile = () => {
     
          
       <View style={[styles.firstName, styles.usernameLayout]}>
-        <View style={[styles.username1, styles.usernameLayout]}>
+        <View>
           <View style={[styles.usernameChild, styles.childBorder]} />
           <Text style={[styles.username2, styles.profile1Clr]}>Category</Text>
           <TextInput
-            style={[styles.sukhMahey, styles.maheyTypo]}
+            style={[styles.name, styles.nameTypo]}
             value={category}
             onChangeText={(text) => setCategory(text)}
+            placeholder="Enter category"
           />
         </View>
       </View>
@@ -90,7 +91,7 @@ const Profile = () => {
           <View style={[styles.usernameChild, styles.childBorder]} />
           <Text style={[styles.username2, styles.profile1Clr]}>Amount</Text>
           <TextInput
-             style={[styles.sukhMahey, styles.maheyTypo]}
+             style={[styles.name, styles.nameTypo]}
             value={amount}
             onChangeText={(text) => setAmount(text)}
             placeholder="Enter Amount"
@@ -105,7 +106,7 @@ const Profile = () => {
           <View style={[styles.usernameChild, styles.childBorder]} />
           <Text style={[styles.username2, styles.profile1Clr]}>Select Date</Text>
           <TextInput
-            style={[styles.sukhMahey, styles.maheyTypo]}
+            style={[styles.name, styles.nameTypo]}
             
     
          date={date}
@@ -120,6 +121,9 @@ const Profile = () => {
         </View>
       
     </View>
+    <Pressable
+ 
+    onPress={() => navigation.navigate("TransactionsDetail")}>
       <View style={[styles.confirmationButton, styles.confirmationLayout]}>
         <View
           style={[styles.confirmationButtonChild, styles.confirmationLayout]}
@@ -131,15 +135,8 @@ const Profile = () => {
         />
         <Text style={[styles.signOut, styles.onlineTypo]}>Submit Expense</Text>
       </View>
-      <Pressable
-        style={styles.page1}
-        onPress={() => navigation.navigate("Onboarding1")}
-      >
-        <Image
-          style={styles.icon}
-          resizeMode="cover"
-          source={require("../assets/page-16.png")}
-        />
+      
+      
       </Pressable>
       
       <View style={styles.profileChild} />
@@ -185,7 +182,7 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     left: 0,
   },
-  maheyTypo: {
+  nameTypo: {
     color: Color.colorMediumblue_200,
     fontFamily: FontFamily.sFProText,
     textAlign: "left",
@@ -282,9 +279,9 @@ const styles = StyleSheet.create({
     left: 30,
   },
   usernameChild: {
-    top: 58,
+    top: 70,
     borderColor: Color.colorLavender,
-    borderTopWidth: 1,
+    borderTopWidth: 7,
     width: 316,
     height: 1,
     position: "absolute",
@@ -295,7 +292,7 @@ const styles = StyleSheet.create({
     left: 0,
     top: 0,
   },
-  sukhMahey: {
+  name: {
     top: 33,
     fontSize: FontSize.size_sm,
   },
@@ -345,7 +342,7 @@ const styles = StyleSheet.create({
   signOut: {
     top: 16,
     fontFamily: FontFamily.montserratRegular,
-    left: 30,
+    left: 100,
   },
   confirmationButton: {
     top: 580,
@@ -515,4 +512,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Profile;
+export default Expense;

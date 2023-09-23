@@ -67,7 +67,7 @@ const Welcome = () => {
 const styles = StyleSheet.create({
   iconPosition: {
     left: 0,
-    top: 0,
+    top: -70,
   },
   buttonLayout: {
     height: 52,
@@ -90,8 +90,8 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   topheadershapesIcon: {
-    width: 375,
-    height: 722,
+    width: 387,
+    height: 710,
     position: "absolute",
   },
   logoWhite3Icon: {
