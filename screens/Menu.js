@@ -48,11 +48,11 @@ const Menu = () => {
             source={require("../assets/ellipse-65.png")}
           />
         </View>
-        <View style={styles.sukhbirMaheyParent}>
-          <Text style={[styles.sukhbirMahey, styles.maheyPosition]}>
+        <View style={styles.nameParent}>
+          <Text style={[styles.nameb, styles.namePosition]}>
            John Doe
           </Text>
-          <Text style={[styles.sukhMahey, styles.maheyPosition]}>
+          <Text style={[styles.name, styles.namePosition]}>
             @John
           </Text>
         </View>
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     height: 50,
     position: "absolute",
   },
-  maheyPosition: {
+  namePosition: {
     color: Color.colorDarkslategray,
     textAlign: "left",
     left: 0,
@@ -259,19 +259,19 @@ const styles = StyleSheet.create({
     left: 0,
     top: 0,
   },
-  sukhbirMahey: {
+  nameb: {
     fontSize: FontSize.size_base,
     fontWeight: "700",
     fontFamily: FontFamily.montserratBold,
     top: 0,
   },
-  sukhMahey: {
+  name: {
     top: 20,
     fontSize: FontSize.size_sm,
     fontFamily: FontFamily.montserratRegular,
     color: Color.colorDarkslategray,
   },
-  sukhbirMaheyParent: {
+  nameParent: {
     top: 7,
     left: 58,
     width: 126,

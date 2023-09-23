@@ -67,7 +67,7 @@ const HomePage = () => {
           source={require("../assets/small-arrow-1.png")}
         />
       </Pressable>
-      <Text style={[styles.goodMorningSukh, styles.yourTypo]}>{`Good Morning
+      <Text style={[styles.goodMorningName, styles.yourTypo]}>{`Good Morning
 JOHN,`}</Text>
       <View style={[styles.balanceCard, styles.balanceCardLayout]}>
         <View style={[styles.balanceCardChild, styles.balanceCardLayout]} />
@@ -319,7 +319,7 @@ const styles = StyleSheet.create({
     top: 537,
     left: 30,
   },
-  goodMorningSukh: {
+  goodMorningName: {
     top: 124,
     left: 60,
     fontSize: FontSize.size_5xl,
