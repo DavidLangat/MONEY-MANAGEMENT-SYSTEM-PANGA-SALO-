@@ -9,7 +9,38 @@ const SignIn = () => {
   const navigation = useNavigation();
   const [email, setemail] = useState('');
   const [password, setPassword] = useState('');
+  const handleSignIn = () => {
+    // Create an object with the form data
+    const formData = {
+        email,
+        password,
+    };
 
+    // Send a POST request to the PHP script
+    fetch('http://192.168.1.101:80/pangasolo/signin.php', {
+        method: 'POST',
+        body: JSON.stringify(formData),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Handle the response from the server
+        console.log(data);
+        // Redirect to the home page or show a success message
+        // navigation.navigate("HomePage");
+        if (data.status === 'error'){
+          alert(data.message);
+        }
+        else {
+          navigation.navigate("HomePage1");
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+};
   return (
     <View style={styles.signIn}>
       <Image
@@ -67,7 +98,7 @@ const SignIn = () => {
       </Text>
       <Pressable
         style={[styles.signinButton, styles.signinLayout]}
-        onPress={() => navigation.navigate("HomePage")}
+        onPress={handleSignIn}
       >
         <LinearGradient
           style={[styles.signinButtonChild, styles.signinLayout]}

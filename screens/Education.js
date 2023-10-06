@@ -5,16 +5,37 @@ import { useNavigation } from "@react-navigation/native";
 import { Border, Color, FontFamily, FontSize } from "../GlobalStyles";
 import  { useState } from 'react';
 import DatePicker from 'react-native-datepicker';
-const Profile = () => {
+import axios from 'axios'; 
+const Income = () => {
   const navigation = useNavigation();
-  const [firstname, setFirstname] = useState('');
-  const [lastname, setLastname] = useState('');
-  const [email, setEmail] = useState('');
+  const [category, setCategory] = useState('');
+  const [amount, setAmount] = useState('');
+  const [date, setDate] = useState('');
 
-  
-  
+  const handleExpenseSubmit = () => {
+    // Prepare the data to send to the server
+    const expenseData = {
+        category,
+        amount,
+        // date,
+    };
 
-
+    // Make a POST request to the server
+    axios.post('http://192.168.1.101:80/pangasolo/expense.php', expenseData)
+        .then((response) => {
+            if (response.data.status === 'success') {
+                // Expense recorded successfully, handle success logic
+                alert(response.data.message);
+            } else {
+                // Error occurred, handle error logic
+                alert(response.data.message);
+            }
+        })
+        .catch((error) => {
+            // Handle network or other errors
+            console.error(error);
+        });
+};
   return (
     <View style={styles.profile}>
       <LinearGradient
@@ -31,20 +52,62 @@ const Profile = () => {
         useAngle={true}
         angle={191.45}
       />
-     
+      <Pressable
+        
+        onPress={() => navigation.navigate("HomePage")}
+      >
+        <Image
+        style={[styles.tabBarIcon1, styles.tabBarIconPosition1]}
+        
+        
+        source={require("../assets/home.png")}
+      />
+      </Pressable>
+
+      <Pressable
+        onPress={() => navigation.navigate("Notification1")}
+      >
+         <Image
+        style={[styles.tabBarIcon3, styles.tabBarIconPosition3]}
+        
+        
+        source={require("../assets/bell.png")}
+      />
+      </Pressable>
+      
+       <Pressable
+        onPress={() => navigation.navigate("Expense")}
+      >
+        <Image
+        style={[styles.tabBarIcon2, styles.tabBarIconPosition2]}
+        
+        
+        source={require("../assets/expenses.png")}
+      />
+      </Pressable> 
+       <Pressable
+        onPress={() => navigation.navigate("Reports")}
+      >
+        <Image
+        style={[styles.tabBarIcon4, styles.tabBarIconPosition4]}
+        
+        
+        source={require("../assets/report.png")}
+      />
+      </Pressable>
    
-      <Text style={[styles.profile1, styles.profile1Clr]}>Profile</Text>
+      <Text style={[styles.profile1, styles.profile1Clr]}>Expense Logging</Text>
     
          
       <View style={[styles.firstName, styles.usernameLayout]}>
         <View>
           <View style={[styles.usernameChild, styles.childBorder]} />
-          <Text style={[styles.username2, styles.profile1Clr]}>FirstName</Text>
+          <Text style={[styles.username2, styles.profile1Clr]}>Category</Text>
           <TextInput
             style={[styles.name, styles.nameTypo]}
-            value={firstname}
-            onChangeText={(text) => setFirstname(text)}
-            placeholder="John "
+            value={category}
+            onChangeText={(text) => setCategory(text)}
+            placeholder="Enter category"
           />
         </View>
       </View>
@@ -52,36 +115,41 @@ const Profile = () => {
       <View style={[styles.lastName, styles.usernameLayout]}>
         <View style={[styles.username1, styles.usernameLayout]}>
           <View style={[styles.usernameChild, styles.childBorder]} />
-          <Text style={[styles.username2, styles.profile1Clr]}>LastName</Text>
+          <Text style={[styles.username2, styles.profile1Clr]}>Amount</Text>
           <TextInput
              style={[styles.name, styles.nameTypo]}
-            value={lastname}
-            onChangeText={(text) => setLastname(text)}
-            placeholder="Doe"
+            value={amount}
+            onChangeText={(text) => setAmount(text)}
+            placeholder="Enter Amount"
 
           />
           <View style={styles.tick1} />
         </View>
       </View>
 
-      <View style={[styles.dob, styles.usernameLayout]}>
+      {/* <View style={[styles.dob, styles.usernameLayout]}>
         <View style={[styles.username1, styles.usernameLayout]}>
           <View style={[styles.usernameChild, styles.childBorder]} />
-          <Text style={[styles.username2, styles.profile1Clr]}>Email</Text>
+          <Text style={[styles.username2, styles.profile1Clr]}>Select Date</Text>
           <TextInput
-           style={[styles.name, styles.nameTypo]}
-            value={email}
-            onChangeText={(text) => setEmail(text)}
-            placeholder="JohnDoe@gmail.com"
+            style={[styles.name, styles.nameTypo]}
+            
+    
+         date={date}
+        mode="date"
+        placeholder="Select date"
+        format="YYYY-MM-DD"
+        confirmBtnText="Confirm"
+        cancelBtnText="Cancel"
+        onDateChange={(date) => setDate(date)}
           />
           <View style={styles.tick1} />
         </View>
       
-    </View>
-    
+    </View> */}
     <Pressable
  
-    onPress={() => navigation.navigate("Onboarding1")}>
+    onPress={handleExpenseSubmit}>
       <View style={[styles.confirmationButton, styles.confirmationLayout]}>
         <View
           style={[styles.confirmationButtonChild, styles.confirmationLayout]}
@@ -91,14 +159,13 @@ const Profile = () => {
           resizeMode="cover"
           source={require("../assets/mask-group1.png")}
         />
-        <Text style={[styles.signOut, styles.onlineTypo]}>Sign Out</Text>
+        <Text style={[styles.signOut, styles.onlineTypo]}>Submit Expense</Text>
       </View>
       
       
       </Pressable>
       
       <View style={styles.profileChild} />
-      
     </View>
   );
 };
@@ -264,7 +331,7 @@ const styles = StyleSheet.create({
     left: 30,
   },
   firstName: {
-    top: 250,
+    top: 230,
     left: 30,
   },
   tick1: {
@@ -276,20 +343,12 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   lastName: {
-    top: 360,
+    top: 330,
     left: 30,
   },
   dob: {
     top: 450,
     left: 30,
-  },
-  pass:{
-    top:470,
-    left:30
-  },
-  pass1:{
-    top:580,
-    left:30
   },
   confirmationButtonChild: {
     borderRadius: Border.br_9xl,
@@ -309,10 +368,10 @@ const styles = StyleSheet.create({
   signOut: {
     top: 16,
     fontFamily: FontFamily.montserratRegular,
-    left: 130,
+    left: 100,
   },
   confirmationButton: {
-    top: 600,
+    top: 580,
     left: 29,
     width: 317,
     height: 52,
@@ -477,55 +536,6 @@ const styles = StyleSheet.create({
     
     
   },
-   tabBarIconPosition1: {
-    width: 30,
-    left: 35,
-    position: "absolute",
-    
-  },
-   tabBarIcon1: {
-    top: 730,
-    height: 30,
-    
-    
-  },
-   tabBarIconPosition2: {
-    width: 30,
-    left: 125,
-    position: "absolute",
-    
-  },
-   tabBarIcon2: {
-    top: 730,
-    height: 30,
-    
-    
-  },
-     tabBarIconPosition3: {
-    width: 30,
-    right: 125,
-    position: "absolute",
-    
-  },
-   tabBarIcon3: {
-    top: 730,
-    height: 30,
-    
-    
-  },
-     tabBarIconPosition4: {
-    width: 30,
-    right: 35,
-   
-    position: "absolute",
-    
-  },
-   tabBarIcon4: {
-    top: 730,
-    height: 30,
-    
-    
-  },
 });
 
-export default Profile;
+export default Income;

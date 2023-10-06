@@ -1,41 +1,88 @@
 import * as React from "react";
-import { Image, StyleSheet, Text, View, Pressable } from "react-native";
+import { Image, StyleSheet, Text, View, Pressable, TouchableOpacity } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import { FontFamily, FontSize, Color, Border } from "../GlobalStyles";
-
+import { FlatGrid } from "react-native-super-grid";
 const TransactionsDetail = () => {
   const navigation = useNavigation();
 
+  const [expenses, setExpenses] = React.useState({ "expensesList": [{ "amount": "200.00", "category": "test", "date": "2023-10-02", "id": "1" }, { "amount": "3000.00", "category": "hello", "date": "2023-10-02", "id": "2" }], "totalExpenses": 3200, "totalExpensesByCategory": { "hello": 3000, "test": 200 } });
+  const data = {
+    hello: 3000,
+    test: 200,
+    test2: 400,
+    test3: 500,
+    test4: 600,
+    test5: 700,
+    test6: 800,
+    test7: 900,
+  };
+  const backgroundColors = ["#FFC3A0", "#AED9E0", "#B0E57C", "#E0B0E5", "#FFA07A", "#A0C4FF", "#C4A0FF", "#B7E0D6"];
+  const textColors = ["#333333", "#666666", "#444444", "#555555", "#777777", "#222222", "#888888", "#333333"];
+
+  const renderGridItem = (item, index) => (
+    <View className=" w-full  rounded-2xl p-4" style={{ backgroundColor: backgroundColors[index] }} >
+      <Text className="text-lg capitalize" style={{ color: textColors[index] }}>{item.key}</Text>
+      <Text className="text-xl font-bold" style={{ color: textColors[index] }}>KSH.{item.value}</Text>
+    </View>
+  );
+
+  React.useEffect(() => {
+    // Fetch data from the PHP script
+    fetch("http://192.168.1.101:80/pangasolo/getExpenses.php")
+      .then((response) => response.json())
+      .then((data) => {
+        setExpenses(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
   return (
     <View style={styles.transactionsDetail}>
+<Image
+  resizeMode="stretch"
+  source={require("../assets/rectangle-17.png")}
+  className="w-screen mt-5 absolute rounded-b"
+/>
       <Image
-        style={[styles.transactionsDetailChild, styles.transactionsLayout]}
-        resizeMode="cover"
-        source={require("../assets/rectangle-17.png")}
-      />
-      <Image
-        style={[styles.transactionsDetailItem, styles.transactionsLayout]}
-        resizeMode="cover"
+        // style={[ styles.transactionsLayout]}    
+
+
+        resizeMode="stretch"
         source={require("../assets/rectangle-16.png")}
+        className="w-screen absolute rounded-b"
+
       />
       <View style={[styles.navigationBar, styles.travel1IconLayout]}>
         <Text style={[styles.transactions, styles.searchTypo1]}>
           Expenses
         </Text>
-        <Image
+        <TouchableOpacity
+          onPress={navigation.goBack}
           style={[styles.navArrow2Icon, styles.timePosition]}
+
+        >
+
+        <Image
+          // style={[styles.navArrow2Icon, styles.timePosition]}
           resizeMode="cover"
           source={require("../assets/navarrow-2.png")}
+
         />
+        </TouchableOpacity> 
       </View>
       <Text style={styles.yourTotalExpenses}>Your total Expenses</Text>
-      <Text style={[styles.text, styles.textTypo2]}>KSH.2063.30</Text>
-     
+      <Text style={[styles.text, styles.textTypo2]}>KSH.{expenses.totalExpenses}</Text>
+
       <Text style={[styles.trackYourExpenses, styles.textTypo2]}>
         Track Your Expenses
       </Text>
-      <View style={[styles.travel2, styles.travelLayout]}>
+
+      {/* <View style={[styles.travel2, styles.travelLayout]}>
         <Image
           style={[styles.travelChild, styles.childPosition]}
           resizeMode="cover"
@@ -90,12 +137,13 @@ const TransactionsDetail = () => {
         />
         <Text style={[styles.medicine3, styles.text10Position]}>Medicine</Text>
         <Text style={[styles.text10, styles.text10Position]}>KSh.800</Text>
-      </View>
+      </View> */}
       <Pressable
         style={[styles.creditCardRepayment, styles.creditCardLayout]}
         onPress={() => navigation.navigate("Transactions")}
+        // className="absolute top-60"
       >
-        
+
         <LinearGradient
           style={[styles.creditCardRepaymentChild, styles.creditCardLayout]}
           locations={[0, 1]}
@@ -115,50 +163,16 @@ const TransactionsDetail = () => {
           source={require("../assets/small-arrow-1.png")}
         />
       </Pressable>
-       <Pressable
-        
-        onPress={() => navigation.navigate("HomePage")}
-      >
-        <Image
-        style={[styles.tabBarIcon1, styles.tabBarIconPosition1]}
-        
-        
-        source={require("../assets/home.png")}
-      />
-      </Pressable>
+            <View style={{ height: 250, top: 320 }} className="rounded-2xl mx-2">
 
-      <Pressable
-        onPress={() => navigation.navigate("Notification1")}
-      >
-         <Image
-        style={[styles.tabBarIcon3, styles.tabBarIconPosition3]}
-        
-        
-        source={require("../assets/bell.png")}
-      />
-      </Pressable>
-      
-       <Pressable
-        onPress={() => navigation.navigate("Expense")}
-      >
-        <Image
-        style={[styles.tabBarIcon2, styles.tabBarIconPosition2]}
-        
-        
-        source={require("../assets/expenses.png")}
-      />
-      </Pressable> 
-       <Pressable
-        onPress={() => navigation.navigate("Reports")}
-      >
-        <Image
-        style={[styles.tabBarIcon4, styles.tabBarIconPosition4]}
-        
-        
-        source={require("../assets/report.png")}
-      />
-      </Pressable>
-   
+        <FlatGrid
+          data={Object.entries(expenses.totalExpensesByCategory).map(([key, value]) => ({ key, value }))}
+          itemDimension={150} // Adjust the dimension as needed
+          spacing={13} // Adjust the spacing as needed
+          renderItem={({ item, index }) => renderGridItem(item, index)}
+
+        />
+      </View>
     </View>
   );
 };
@@ -166,7 +180,7 @@ const TransactionsDetail = () => {
 const styles = StyleSheet.create({
   transactionsLayout: {
     height: 245,
-    width: 375,
+    // width: 375,
     left: 0,
     position: "absolute",
   },
@@ -292,12 +306,12 @@ const styles = StyleSheet.create({
   },
   transactionsDetailChild: {
     top: 5,
-    width: 375,
-     margin:5,
+    // width: 375,
+    margin: 5,
   },
   transactionsDetailItem: {
     top: -5,
-     margin:5,
+    margin: 5,
   },
   batteryIcon: {
     height: "62.96%",
@@ -580,10 +594,10 @@ const styles = StyleSheet.create({
     textAlign: "left",
     position: "absolute",
   },
-  travel2: {
-    top: 320,
-    left: 30,
-  },
+  // travel2: {
+  //   top: 320,
+  //   left: 30,
+  // },
   sports5: {
     fontSize: FontSize.size_lg,
     top: 24,
@@ -664,7 +678,7 @@ const styles = StyleSheet.create({
   },
   creditCardRepayment: {
     top: 580,
-    left: 30,
+    left: 50,
   },
   transactionsDetail: {
     flex: 1,
@@ -677,86 +691,86 @@ const styles = StyleSheet.create({
     width: 30,
     left: 50,
     position: "absolute",
-    
+
   },
-   tabBarIcon1: {
+  tabBarIcon1: {
     top: 730,
     height: 30,
-    
-    
+
+
   },
-   tabBarIconPosition2: {
+  tabBarIconPosition2: {
     width: 30,
     left: 175,
     position: "absolute",
-    
+
   },
-   tabBarIcon2: {
+  tabBarIcon2: {
     top: 730,
     height: 30,
-    
-    
+
+
   },
-     tabBarIconPosition3: {
+  tabBarIconPosition3: {
     width: 30,
     right: 50,
     position: "absolute",
-    
+
   },
-   tabBarIcon3: {
+  tabBarIcon3: {
     top: 730,
     height: 30,
-    
-    
+
+
   },
-   tabBarIconPosition1: {
+  tabBarIconPosition1: {
     width: 30,
     left: 35,
     position: "absolute",
-    
+
   },
-   tabBarIcon1: {
+  tabBarIcon1: {
     top: 730,
     height: 30,
-    
-    
+
+
   },
-   tabBarIconPosition2: {
+  tabBarIconPosition2: {
     width: 30,
     left: 125,
     position: "absolute",
-    
+
   },
-   tabBarIcon2: {
+  tabBarIcon2: {
     top: 730,
     height: 30,
-    
-    
+
+
   },
-     tabBarIconPosition3: {
+  tabBarIconPosition3: {
     width: 30,
     right: 125,
     position: "absolute",
-    
+
   },
-   tabBarIcon3: {
+  tabBarIcon3: {
     top: 730,
     height: 30,
-    
-    
+
+
   },
-     tabBarIconPosition4: {
+  tabBarIconPosition4: {
     width: 30,
     right: 35,
-   
+
     position: "absolute",
-    
+
   },
-   tabBarIcon4: {
+  tabBarIcon4: {
     top: 730,
     height: 30,
-    
-    
+
+
   },
 });
 

@@ -7,49 +7,6 @@ const Notification1 = () => {
   const navigation = useNavigation();
   return (
     <View style={styles.notification}> 
-    <Pressable
-        
-        onPress={() => navigation.navigate("HomePage")}
-      >
-        <Image
-        style={[styles.tabBarIcon1, styles.tabBarIconPosition1]}
-        
-        
-        source={require("../assets/home.png")}
-      />
-      </Pressable>
-
-      <Pressable
-        onPress={() => navigation.navigate("Notification1")}
-      >
-         <Image
-        style={[styles.tabBarIcon3, styles.tabBarIconPosition3]}
-        
-        
-        source={require("../assets/bell.png")}
-      />
-      </Pressable>
-      
-       <Pressable
-        onPress={() => navigation.navigate("Expense")}
-      >
-        <Image
-        style={[styles.tabBarIcon2, styles.tabBarIconPosition2]}
-        
-        
-        source={require("../assets/expenses.png")}
-      />
-      </Pressable> 
-       <Pressable
-        onPress={() => navigation.navigate("Reports")}
-      >
-        <Image
-        style={[styles.tabBarIcon4, styles.tabBarIconPosition4]}
-        
-        
-        source={require("../assets/report.png")}
-      />
-      </Pressable>
    
       <View style={[styles.searchBar, styles.searchLayout]}>
         <View style={[styles.searchBarChild, styles.searchLayout]} />

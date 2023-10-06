@@ -21,16 +21,22 @@ import Notification1 from "./screens/Notification1";
 import Profile from "./screens/Profile";
 import Expense from "./screens/Expense";
 import Reports from "./screens/Reports";
+import TrackGoals from "./screens/TrackGoals";
+import Education from "./screens/Education";
+import Advisor from "./screens/Advisor"
+
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View, Text, Pressable, TouchableOpacity } from "react-native";
+import Income from "./screens/Income";
+import { LoginStackNavigator } from "./components/navigation/StackNavigator";
 
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
 
   return (
     <>
-      <NavigationContainer>
+      {/* <NavigationContainer>
         {hideSplashScreen ? (
           <Stack.Navigator screenOptions={{ headerShown: false }}>
           
@@ -112,11 +118,36 @@ const App = () => {
               component={Reports}
               options={{ headerShown: false }}
             />
+            <Stack.Screen
+              name="Income"
+              component={Income}
+              options={{ headerShown: false }}
+            />
+             <Stack.Screen
+              name="TrackGoals"
+              component={TrackGoals}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Education"
+              component={Education}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Advisor"
+              component={Advisor}
+              options={{ headerShown: false }}
+            />
+
             
             
            
           </Stack.Navigator>
         ) : null}
+      </NavigationContainer> */}
+      <NavigationContainer  >
+
+        <LoginStackNavigator />
       </NavigationContainer>
     </>
   );

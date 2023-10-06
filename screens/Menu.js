@@ -62,6 +62,7 @@ const Menu = () => {
         resizeMode="cover"
         source={require("../assets/rectangle-14.png")}
       />
+      <Pressable  onPress={() => navigation.navigate("Income")}>
       <View style={[styles.payments, styles.paymentsPosition]}>
         <View style={styles.payments1Parent}>
           <Image
@@ -77,6 +78,9 @@ const Menu = () => {
           source={require("../assets/small-arrow-2.png")}
         />
       </View>
+      </Pressable>
+      
+      <Pressable  onPress={() => navigation.navigate("TrackGoals")}>
       <View style={[styles.transactions, styles.paymentsPosition]}>
         <View style={styles.payments1Group}>
           <Image
@@ -94,6 +98,9 @@ const Menu = () => {
           source={require("../assets/small-arrow-2.png")}
         />
       </View>
+      </Pressable>
+
+      <Pressable  onPress={() => navigation.navigate("Education")}>
       <View style={styles.myCards}>
         <View style={styles.payments1Container}>
           <Image
@@ -109,6 +116,8 @@ const Menu = () => {
           source={require("../assets/small-arrow-2.png")}
         />
       </View>
+      </Pressable>
+      <Pressable  onPress={() => navigation.navigate("Advisor")}>
       <View style={styles.promotions}>
         <View style={styles.promotionsWrapper}>
           <Text style={[styles.promotions1, styles.myCards1Typo]}>
@@ -126,6 +135,7 @@ const Menu = () => {
           source={require("../assets/promotions-1.png")}
         />
       </View>
+      </Pressable>
      
     </View>
   );

@@ -10,26 +10,27 @@ const HomePage = () => {
   return (
     <View style={[styles.homePage, styles.iconLayout1]}>
       <Image
-        style={[styles.homePageChild, styles.tabBarIconPosition]}
-        resizeMode="cover"
+        // style={[styles.homePageChild, styles.tabBarIconPosition]}
+        resizeMode="stretch"
         source={require("../assets/rectangle-4.png")}
+        className="w-screen absolute"
       />
       <Pressable
         style={[]}
         onPress={() => navigation.navigate("Profile")}
       >
-      <View style={[styles.imageOnline, styles.imageOnlinePosition]}>
-        <Image
-          style={styles.whiteIcon}
-          resizeMode="cover"
-          source={require("../assets/user.png")}
-        />
-        <Image
-          style={styles.imageOnlineChild}
-          resizeMode="cover"
-          source={require("../assets/ellipse-65.png")}
-        />
-      </View>
+        <View style={[styles.imageOnline, styles.imageOnlinePosition]}>
+          <Image
+            style={styles.whiteIcon}
+            resizeMode="cover"
+            source={require("../assets/user.png")}
+          />
+          <Image
+            style={styles.imageOnlineChild}
+            resizeMode="cover"
+            source={require("../assets/ellipse-65.png")}
+          />
+        </View>
       </Pressable>
       <Pressable
         style={[styles.hamburgerMenu1, styles.imageOnlinePosition]}
@@ -41,7 +42,7 @@ const HomePage = () => {
           source={require("../assets/hamburger-menu-1.png")}
         />
       </Pressable>
-      
+
       <Pressable
         style={[styles.bankAccountsCard, styles.bankCardLayout]}
         onPress={() => navigation.navigate("TransactionsDetail")}
@@ -91,51 +92,8 @@ JOHN,`}</Text>
         
       
       /> */}
-      
-<Pressable
-        
-        onPress={() => navigation.navigate("HomePage")}
-      >
-        <Image
-        style={[styles.tabBarIcon1, styles.tabBarIconPosition1]}
-        
-        
-        source={require("../assets/home.png")}
-      />
-      </Pressable>
 
-      <Pressable
-        onPress={() => navigation.navigate("Notification1")}
-      >
-         <Image
-        style={[styles.tabBarIcon3, styles.tabBarIconPosition3]}
-        
-        
-        source={require("../assets/bell.png")}
-      />
-      </Pressable>
       
-       <Pressable
-        onPress={() => navigation.navigate("Expense")}
-      >
-        <Image
-        style={[styles.tabBarIcon2, styles.tabBarIconPosition2]}
-        
-        
-        source={require("../assets/expenses.png")}
-      />
-      </Pressable> 
-       <Pressable
-        onPress={() => navigation.navigate("Reports")}
-      >
-        <Image
-        style={[styles.tabBarIcon4, styles.tabBarIconPosition4]}
-        
-        
-        source={require("../assets/report.png")}
-      />
-      </Pressable>
-   
     </View>
   );
 };
@@ -199,10 +157,10 @@ const styles = StyleSheet.create({
   },
   homePageChild: {
     height: 290,
-    top:-5,
-    width:200,
-    right:200,
-    margin:5,
+    top: -5,
+    width: 200,
+    right: 200,
+    margin: 5,
   },
   whiteIcon: {
     top: 5,
@@ -223,7 +181,7 @@ const styles = StyleSheet.create({
     left: 320,
     width: 50,
     height: 50,
-    marginTop:-40
+    marginTop: -40
   },
   icon: {
     height: "100%",
@@ -233,7 +191,7 @@ const styles = StyleSheet.create({
     width: 25,
     height: 20,
     left: 25,
-     marginTop:-30
+    marginTop: -30
   },
   batteryIcon: {
     height: "62.96%",
@@ -381,54 +339,54 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     // backgroundColor: Color.colorWhite,
   },
-   tabBarIconPosition1: {
+  tabBarIconPosition1: {
     width: 30,
     left: 35,
     position: "absolute",
-    
+
   },
-   tabBarIcon1: {
+  tabBarIcon1: {
     top: 730,
     height: 30,
-    
-    
+
+
   },
-   tabBarIconPosition2: {
+  tabBarIconPosition2: {
     width: 30,
     left: 125,
     position: "absolute",
-    
+
   },
-   tabBarIcon2: {
+  tabBarIcon2: {
     top: 730,
     height: 30,
-    
-    
+
+
   },
-     tabBarIconPosition3: {
+  tabBarIconPosition3: {
     width: 30,
     right: 125,
     position: "absolute",
-    
+
   },
-   tabBarIcon3: {
+  tabBarIcon3: {
     top: 730,
     height: 30,
-    
-    
+
+
   },
-     tabBarIconPosition4: {
+  tabBarIconPosition4: {
     width: 30,
     right: 35,
-   
+
     position: "absolute",
-    
+
   },
-   tabBarIcon4: {
+  tabBarIcon4: {
     top: 730,
     height: 30,
-    
-    
+
+
   },
 });
 

@@ -5,11 +5,37 @@ import { useNavigation } from "@react-navigation/native";
 import { Border, Color, FontFamily, FontSize } from "../GlobalStyles";
 import  { useState } from 'react';
 import DatePicker from 'react-native-datepicker';
+import axios from 'axios'; 
 const Expense = () => {
   const navigation = useNavigation();
   const [category, setCategory] = useState('');
   const [amount, setAmount] = useState('');
   const [date, setDate] = useState('');
+
+  const handleExpenseSubmit = () => {
+    // Prepare the data to send to the server
+    const expenseData = {
+        category,
+        amount,
+        // date,
+    };
+
+    // Make a POST request to the server
+    axios.post('http://192.168.1.101:80/pangasolo/expense.php', expenseData)
+        .then((response) => {
+            if (response.data.status === 'success') {
+                // Expense recorded successfully, handle success logic
+                alert(response.data.message);
+            } else {
+                // Error occurred, handle error logic
+                alert(response.data.message);
+            }
+        })
+        .catch((error) => {
+            // Handle network or other errors
+            console.error(error);
+        });
+};
   return (
     <View style={styles.profile}>
       <LinearGradient
@@ -26,49 +52,7 @@ const Expense = () => {
         useAngle={true}
         angle={191.45}
       />
-      <Pressable
-        
-        onPress={() => navigation.navigate("HomePage")}
-      >
-        <Image
-        style={[styles.tabBarIcon1, styles.tabBarIconPosition1]}
-        
-        
-        source={require("../assets/home.png")}
-      />
-      </Pressable>
-
-      <Pressable
-        onPress={() => navigation.navigate("Notification1")}
-      >
-         <Image
-        style={[styles.tabBarIcon3, styles.tabBarIconPosition3]}
-        
-        
-        source={require("../assets/bell.png")}
-      />
-      </Pressable>
-      
-       <Pressable
-        onPress={() => navigation.navigate("Expense")}
-      >
-        <Image
-        style={[styles.tabBarIcon2, styles.tabBarIconPosition2]}
-        
-        
-        source={require("../assets/expenses.png")}
-      />
-      </Pressable> 
-       <Pressable
-        onPress={() => navigation.navigate("Reports")}
-      >
-        <Image
-        style={[styles.tabBarIcon4, styles.tabBarIconPosition4]}
-        
-        
-        source={require("../assets/report.png")}
-      />
-      </Pressable>
+   
    
       <Text style={[styles.profile1, styles.profile1Clr]}>Expense Logging</Text>
     
@@ -101,7 +85,7 @@ const Expense = () => {
         </View>
       </View>
 
-      <View style={[styles.dob, styles.usernameLayout]}>
+      {/* <View style={[styles.dob, styles.usernameLayout]}>
         <View style={[styles.username1, styles.usernameLayout]}>
           <View style={[styles.usernameChild, styles.childBorder]} />
           <Text style={[styles.username2, styles.profile1Clr]}>Select Date</Text>
@@ -120,10 +104,10 @@ const Expense = () => {
           <View style={styles.tick1} />
         </View>
       
-    </View>
+    </View> */}
     <Pressable
  
-    onPress={() => navigation.navigate("TransactionsDetail")}>
+    onPress={handleExpenseSubmit}>
       <View style={[styles.confirmationButton, styles.confirmationLayout]}>
         <View
           style={[styles.confirmationButtonChild, styles.confirmationLayout]}

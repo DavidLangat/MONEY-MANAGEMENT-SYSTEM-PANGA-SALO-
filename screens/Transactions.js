@@ -1,169 +1,143 @@
 import * as React from "react";
-import { Image, StyleSheet, Text, View, Pressable } from "react-native";
+import { Image, StyleSheet, Text, View, Pressable,FlatList, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Color, FontSize, FontFamily, Border } from "../GlobalStyles";
 
 const Transactions = () => {
   const navigation = useNavigation();
+  const [expenses, setExpenses] = React.useState({ "expensesList": [{ "amount": "200.00", "category": "test", "date": "2023-10-02", "id": "1" }, { "amount": "3000.00", "category": "hello", "date": "2023-10-02", "id": "2" }], "totalExpenses": 3200, "totalExpensesByCategory": { "hello": 3000, "test": 200 } });
 
+  const data = [
+    {"amount": "200.00", "category": "test", "date": "2023-10-02", "id": "1"},
+    {"amount": "3000.00", "category": "hello", "date": "2023-10-02", "id": "2"},
+    {"amount": "200.00", "category": "red", "date": "2023-10-02", "id": "3"},
+    {"amount": "1234.00", "category": "red", "date": "2023-10-02", "id": "4"},
+    {"amount": "2334.00", "category": "yellow", "date": "2023-10-02", "id": "5"}
+  ];
+
+  React.useEffect(() => {
+    // Fetch data from the PHP script
+    fetch("http://192.168.1.101:80/pangasolo/getExpenses.php")
+      .then((response) => response.json())
+      .then((data) => {
+        setExpenses(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
+  
+  const renderItem = ({ item }) => (
+    <View 
+    // style={[styles.sports, styles.sportsLayout]}
+    className='h-20 w-screen flex flex-row justify-around items-center'
+
+    >
+
+      <View>
+
+      <Image
+        style={[styles.shoppingIcon, styles.sportsLayout]}
+        resizeMode="cover"
+        source={require("../assets/shopping-icon3.png")}
+      />
+      <Image
+        style={[styles.sport1Icon, styles.iconPosition]}
+        resizeMode="cover"
+        source={require("../assets/sport-1.png")}
+      />
+      </View>
+      <View 
+      // style={[styles.shoppingDetails4]}
+      className="flex flex-col"
+      >
+
+
+        <Text className=" font-semibold text-base text-blue-100 capitalize">{item.category}</Text>
+        <Text className="font-semibold text-xs text-blue-300 capitalize">{item.date}</Text>
+      </View>
+      <Text className="font-semibold text-sm text-blue-100 capitalize" >{`- KSH.${item.amount}`}</Text>
+      <View>
+      <Image
+        // style={styles.smallArrow3}
+        resizeMode="cover"
+        source={require("../assets/small-arrow-3.png")}
+      />
+      </View>
+    </View>
+  );
+  
   return (
     <View style={styles.transactions}>
       <Image
-        style={[styles.transactionsChild, styles.transactionsLayout]}
-        resizeMode="cover"
+        // style={[styles.transactionsChild, styles.transactionsLayout]}
+        resizeMode="stretch"
         source={require("../assets/rectangle-17.png")}
+        className="absolute  w-screen mt-5"
       />
       <Image
-        style={[styles.transactionsItem, styles.transactionsLayout]}
-        resizeMode="cover"
+        // style={[styles.transactionsItem, styles.transactionsLayout]}
+        resizeMode="stretch"
         source={require("../assets/rectangle-16.png")}
+        className="absolute  w-screen "
       />
       <Image
-        style={styles.transactionsInner}
-        resizeMode="cover"
+ 
+    //     top: 271,
+    // height: 541,
+    // width: 375,
+    // left: 0,
+    // position: "absolute",
+    //  margin:5,
+        resizeMode="stretch"
         source={require("../assets/rectangle-18.png")}
+        className="top-[271] w-screen  "
       />
-      <View style={styles.transactions1}>
-        <View style={[styles.shopping, styles.sportsLayout]}>
-          <View style={[styles.shoppingDetails, styles.shoppingPosition]}>
-            <Text style={[styles.shopping1, styles.timeClr]}>Shopping</Text>
-            <Text style={styles.march2021820}>15 march 2021, 8:20 PM</Text>
-          </View>
-          <Text style={[styles.text, styles.textTypo]}>-KSh.120</Text>
-          <Image
-            style={[styles.shoppingIcon, styles.sportsLayout]}
-            resizeMode="cover"
-            source={require("../assets/shopping-icon.png")}
-          />
-          <Image
-            style={styles.smallArrow3}
-            resizeMode="cover"
-            source={require("../assets/small-arrow-3.png")}
-          />
-        </View>
-        <View style={[styles.shopping2, styles.sportsLayout]}>
-          <View style={[styles.shoppingDetails1, styles.shoppingPosition]}>
-            <Text style={[styles.shopping1, styles.timeClr]}>Shopping</Text>
-            <Text style={styles.march2021820}>7 march 2021, 3:00 PM</Text>
-          </View>
-          <Text style={[styles.text, styles.textTypo]}>-KSH.600</Text>
-          <Image
-            style={[styles.shoppingIcon, styles.sportsLayout]}
-            resizeMode="cover"
-            source={require("../assets/shopping-icon.png")}
-          />
-          <Image
-            style={styles.smallArrow3}
-            resizeMode="cover"
-            source={require("../assets/small-arrow-3.png")}
-          />
-        </View>
-        <View style={[styles.travel, styles.sportsLayout]}>
-          <View style={[styles.shoppingDetails2, styles.shoppingPosition]}>
-            <Text style={[styles.shopping1, styles.timeClr]}>Travel</Text>
-            <Text style={styles.march2021820}>7 march 2021, 12:10 PM</Text>
-          </View>
-          <Text style={[styles.text, styles.textTypo]}>-KSH.350</Text>
-          <Image
-            style={[styles.shoppingIcon, styles.sportsLayout]}
-            resizeMode="cover"
-            source={require("../assets/shopping-icon1.png")}
-          />
-          <Image
-            style={[styles.travel1Icon, styles.travel1IconLayout]}
-            resizeMode="cover"
-            source={require("../assets/travel-1.png")}
-          />
-          <Image
-            style={styles.smallArrow3}
-            resizeMode="cover"
-            source={require("../assets/small-arrow-3.png")}
-          />
-        </View>
-        <View style={[styles.medicine, styles.sportsLayout]}>
-          <View style={[styles.shoppingDetails3, styles.shoppingPosition]}>
-            <Text style={[styles.shopping1, styles.timeClr]}>Medicine</Text>
-            <Text style={styles.march2021820}>13 march 2021, 6:50 AM</Text>
-          </View>
-          <Text style={[styles.text, styles.textTypo]}>-KSH.80.96</Text>
-          <Image
-            style={[styles.shoppingIcon, styles.sportsLayout]}
-            resizeMode="cover"
-            source={require("../assets/shopping-icon2.png")}
-          />
-          <Image
-            style={styles.smallArrow3}
-            resizeMode="cover"
-            source={require("../assets/small-arrow-3.png")}
-          />
-          <Image
-            style={[styles.travel1Icon, styles.travel1IconLayout]}
-            resizeMode="cover"
-            source={require("../assets/medicine-1.png")}
-          />
-        </View>
-        <View style={[styles.sports, styles.sportsLayout]}>
-          <View style={[styles.shoppingDetails4, styles.shoppingPosition]}>
-            <Text style={[styles.shopping1, styles.timeClr]}>Sports</Text>
-            <Text style={styles.march2021820}>10 march 2021, 4:20 PM</Text>
-          </View>
-          <Text style={[styles.text, styles.textTypo]}>-KSH.99.99</Text>
-          <Image
-            style={[styles.shoppingIcon, styles.sportsLayout]}
-            resizeMode="cover"
-            source={require("../assets/shopping-icon3.png")}
-          />
-          <Image
-            style={styles.smallArrow3}
-            resizeMode="cover"
-            source={require("../assets/small-arrow-3.png")}
-          />
-          <Image
-            style={[styles.sport1Icon, styles.iconPosition]}
-            resizeMode="cover"
-            source={require("../assets/sport-1.png")}
-          />
-        </View>
-        <View style={[styles.sports2]}>
-          <View style={[ styles.shoppingPosition]}>
-            <Text style={[styles.shopping1, styles.timeClr]}>Sports</Text>
-            <Text style={styles.march2021820}>5 march 2021, 1:20 PM</Text>
-          </View>
-          <Text style={[styles.text, styles.textTypo]}>-KSH.299.37</Text>
-          <Image
-            style={[styles.shoppingIcon, styles.sportsLayout]}
-            resizeMode="cover"
-            source={require("../assets/shopping-icon3.png")}
-          />
-          <Image
-            style={styles.smallArrow3}
-            resizeMode="cover"
-            source={require("../assets/small-arrow-3.png")}
-          />
-          <Image
-            style={[styles.sport1Icon, styles.iconPosition]}
-            resizeMode="cover"
-            source={require("../assets/sport-1.png")}
-          />
-        </View>
+      <View style={{height:500 ,position:'absolute'}}
+      className='top-[300px] w-screen'
+      >
+      <FlatList
+      data={expenses.expensesList}
+      renderItem={(item) =>renderItem(item)}
+      keyExtractor={(item) => item.id}
+      // style={{
+      //   height:400,
+      //   width:300,
+      // }}
+      className='w-screen h-[400]'
+
+      //           renderItem={({ item, index }) => renderGridItem(item, index)}
+
+    />
+
       </View>
       
       <View style={[styles.navigationBar, styles.travel1IconLayout]}>
         <Text style={[styles.transactions2, styles.text6FlexBox]}>
        Expense History 
         </Text>
-        <Image
+        <TouchableOpacity
+          onPress={navigation.goBack}
           style={[styles.navArrow2Icon, styles.timePosition]}
+
+        >
+
+        <Image
+          // style={[styles.navArrow2Icon, styles.timePosition]}
           resizeMode="cover"
           source={require("../assets/navarrow-2.png")}
+
         />
+        </TouchableOpacity>
       </View>
       <Text style={[styles.yourTotalExpenses, styles.text6FlexBox]}>
         Your total Income used:
       </Text>
-      <Text style={[styles.text6, styles.text6FlexBox]}>KSH.1063.30</Text>
+      <Text style={[styles.text6, styles.text6FlexBox]}>KSH.{expenses.totalExpenses}</Text>
      
-      <View style={[styles.searchBar, styles.searchLayout]}>
+      {/* <View style={[styles.searchBar, styles.searchLayout]}>
         <View style={[styles.searchBarChild, styles.searchLayout]} />
         <Text style={[styles.search, styles.text6FlexBox]}>Search</Text>
         <Image
@@ -171,7 +145,7 @@ const Transactions = () => {
           resizeMode="cover"
           source={require("../assets/search-1.png")}
         />
-      </View>
+      </View> */}
     </View>
   );
 };
@@ -210,7 +184,7 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   iconPosition: {
-    top: 16,
+    top: 0,
     position: "absolute",
     overflow: "hidden",
   },
@@ -276,8 +250,8 @@ const styles = StyleSheet.create({
   },
   shoppingIcon: {
     width: 48,
-    top: 0,
-    left: 0,
+    top: -15,
+    left:-10,
   },
   smallArrow3: {
     top: 18,
@@ -342,12 +316,12 @@ const styles = StyleSheet.create({
     left: 253,
   },
   sport1Icon: {
-    left: 10,
+    // left: 10,
     width: 28,
     height: 16,
   },
   sports: {
-    top: 128,
+    // top: 128,
     width: 327,
     height: 48,
     left: 0,

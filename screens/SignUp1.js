@@ -1,131 +1,189 @@
-import * as React from "react";
-import { StyleSheet, View, Image, Text, Pressable,TextInput } from "react-native";
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  View,
+  Image,
+  Text,
+  Pressable,
+  TextInput,
+  KeyboardAvoidingView,
+  ScrollView,
+} from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import { Border, Color, FontFamily, FontSize } from "../GlobalStyles";
-import  { useState } from 'react';
-import DatePicker from 'react-native-datepicker';
+import axios from "axios";
+
 const SignUp = () => {
   const navigation = useNavigation();
-  const [firstname, setFirstname] = useState('');
-  const [lastname, setLastname] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [cpassword, setCpassword] = useState('');
-  
-  
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [cpassword, setCpassword] = useState("");
+  const [error, setError] = useState(""); // Error state
 
+  const handleSignUp = () => {
+    // Basic validation
+    if (!firstname || !lastname || !email || !password || !cpassword) {
+      setError("All fields are required");
+      return;
+    }
+
+    if (password !== cpassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    // Create an object with the form data
+    const formData = {
+      firstname,
+      lastname,
+      email,
+      password,
+    };
+
+    // Send a POST request to the PHP script using Axios
+    axios
+      .post("http://192.168.1.101:80/pangasolo/signup.php", formData, {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then((response) => {
+        // Handle the response from the server
+        console.log(response.data);
+        // Redirect to the home page or show a success message
+             alert('User Registration successfully');
+        navigation.navigate("SignIn");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        setError("An error occurred. Please try again.");
+      });
+  };
 
   return (
     <View style={styles.profile}>
-      <LinearGradient
-        style={[styles.purple, styles.blueLayout]}
-        locations={[0, 1]}
-        colors={["rgba(181, 47, 248, 0)", "#b52ff8"]}
-        useAngle={true}
-        angle={186.55}
-      />
-      <LinearGradient
-        style={[styles.blue, styles.blueLayout]}
-        locations={[0, 1]}
-        colors={["rgba(64, 206, 242, 0)", "#40cef2"]}
-        useAngle={true}
-        angle={191.45}
-      />
-     
-   
-      <Text style={[styles.profile1, styles.profile1Clr]}>Sign Up</Text>
-    
-         
-      <View style={[styles.firstName, styles.usernameLayout]}>
-        <View>
-          <View style={[styles.usernameChild, styles.childBorder]} />
-          <Text style={[styles.username2, styles.profile1Clr]}>FirstName</Text>
-          <TextInput
-            style={[styles.name, styles.nameTypo]}
-            value={firstname}
-            onChangeText={(text) => setFirstname(text)}
-            placeholder="Enter your Fistname"
-          />
-        </View>
-      </View>
+      <KeyboardAvoidingView behavior="position" style={styles.container}>
 
-      <View style={[styles.lastName, styles.usernameLayout]}>
-        <View style={[styles.username1, styles.usernameLayout]}>
-          <View style={[styles.usernameChild, styles.childBorder]} />
-          <Text style={[styles.username2, styles.profile1Clr]}>LastName</Text>
-          <TextInput
-             style={[styles.name, styles.nameTypo]}
-            value={lastname}
-            onChangeText={(text) => setLastname(text)}
-            placeholder="Enter your Lastname"
-
-          />
-          <View style={styles.tick1} />
-        </View>
-      </View>
-
-      <View style={[styles.dob, styles.usernameLayout]}>
-        <View style={[styles.username1, styles.usernameLayout]}>
-          <View style={[styles.usernameChild, styles.childBorder]} />
-          <Text style={[styles.username2, styles.profile1Clr]}>Email</Text>
-          <TextInput
-           style={[styles.name, styles.nameTypo]}
-            value={email}
-            onChangeText={(text) => setEmail(text)}
-            placeholder="Enter your Email"
-          />
-          <View style={styles.tick1} />
-        </View>
-      
-    </View>
-    <View style={[styles.pass, styles.usernameLayout]}>
-        <View style={[styles.username1, styles.usernameLayout]}>
-          <View style={[styles.usernameChild, styles.childBorder]} />
-          <Text style={[styles.username2, styles.profile1Clr]}>Password</Text>
-          <TextInput
-           style={[styles.name, styles.nameTypo]}
-            value={password}
-            onChangeText={(text) => setPassword(text)}
-            placeholder="Enter your Password"
-          />
-          <View style={styles.tick1} />
-        </View>
-      
-    </View>
-       <View style={[styles.pass1, styles.usernameLayout]}>
-        <View style={[styles.username1, styles.usernameLayout]}>
-          <View style={[styles.usernameChild, styles.childBorder]} />
-          <Text style={[styles.username2, styles.profile1Clr]}>Confirm Password</Text>
-          <TextInput
-           style={[styles.name, styles.nameTypo]}
-            value={cpassword}
-            onChangeText={(text) => setCpassword(text)}
-            placeholder="Confirm your Password"
-          />
-          <View style={styles.tick1} />
-        </View>
-      
-    </View>
-    <Pressable
- 
-    onPress={() => navigation.navigate("HomePage")}>
-      <View style={[styles.confirmationButton, styles.confirmationLayout]}>
-        <View
-          style={[styles.confirmationButtonChild, styles.confirmationLayout]}
+        <LinearGradient
+          style={[styles.purple, styles.blueLayout]}
+          locations={[0, 1]}
+          colors={["rgba(181, 47, 248, 0)", "#b52ff8"]}
+          useAngle={true}
+          angle={186.55}
         />
-        <Image
-          style={[styles.maskGroupIcon, styles.confirmationLayout]}
-          resizeMode="cover"
-          source={require("../assets/mask-group1.png")}
+        <LinearGradient
+          style={[styles.blue, styles.blueLayout]}
+          locations={[0, 1]}
+          colors={["rgba(64, 206, 242, 0)", "#40cef2"]}
+          useAngle={true}
+          angle={191.45}
         />
-        <Text style={[styles.signOut, styles.onlineTypo]}>Sign up</Text>
-      </View>
-      
-      
-      </Pressable>
-      
-      <View style={styles.profileChild} />
+
+
+        <Text style={[styles.profile1, styles.profile1Clr]}>Sign Up</Text>
+
+
+        <View style={[styles.firstName, styles.usernameLayout]}>
+          <View>
+            <View style={[styles.usernameChild, styles.childBorder]} />
+            <Text style={[styles.username2, styles.profile1Clr]}>FirstName</Text>
+            <TextInput
+              style={[styles.name, styles.nameTypo]}
+              value={firstname}
+              onChangeText={(text) => setFirstname(text)}
+              placeholder="Enter your Fistname"
+              keyboardType="default" // Default keyboard
+
+            />
+          </View>
+        </View>
+
+        <View style={[styles.lastName, styles.usernameLayout]}>
+          <View style={[styles.username1, styles.usernameLayout]}>
+            <View style={[styles.usernameChild, styles.childBorder]} />
+            <Text style={[styles.username2, styles.profile1Clr]}>LastName</Text>
+            <TextInput
+              style={[styles.name, styles.nameTypo]}
+              value={lastname}
+              onChangeText={(text) => setLastname(text)}
+              placeholder="Enter your Lastname"
+
+            />
+            <View style={styles.tick1} />
+          </View>
+        </View>
+
+        <View style={[styles.dob, styles.usernameLayout]}>
+          <View style={[styles.username1, styles.usernameLayout]}>
+            <View style={[styles.usernameChild, styles.childBorder]} />
+            <Text style={[styles.username2, styles.profile1Clr]}>Email</Text>
+            <TextInput
+              style={[styles.name, styles.nameTypo]}
+              value={email}
+              onChangeText={(text) => setEmail(text)}
+              placeholder="Enter your Email"
+              keyboardType="default" // Default keyboard
+
+            />
+            <View style={styles.tick1} />
+          </View>
+
+        </View>
+        <View style={[styles.pass, styles.usernameLayout]}>
+          <View style={[styles.username1, styles.usernameLayout]}>
+            <View style={[styles.usernameChild, styles.childBorder]} />
+            <Text style={[styles.username2, styles.profile1Clr]}>Password</Text>
+            <TextInput
+              style={[styles.name, styles.nameTypo]}
+              value={password}
+              onChangeText={(text) => setPassword(text)}
+              placeholder="Enter your Password"
+              keyboardType="default" // Default keyboard
+
+            />
+            <View style={styles.tick1} />
+          </View>
+
+        </View>
+        <View style={[styles.pass1, styles.usernameLayout]}>
+          <View style={[styles.username1, styles.usernameLayout]}>
+            <View style={[styles.usernameChild, styles.childBorder]} />
+            <Text style={[styles.username2, styles.profile1Clr]}>Confirm Password</Text>
+            <TextInput
+              style={[styles.name, styles.nameTypo]}
+              value={cpassword}
+              onChangeText={(text) => setCpassword(text)}
+              placeholder="Confirm your Password"
+              keyboardType="default" // Default keyboard
+
+            />
+            <View style={styles.tick1} />
+          </View>
+
+        </View>
+        {error ? <Text style={styles.errorText} className=' text-red-600 text-center text-lg top-32 '>{error}</Text> : null}
+
+        <Pressable
+
+          onPress={handleSignUp}>
+          <View style={[styles.confirmationButton, styles.confirmationLayout]}>
+            <View
+              style={[styles.confirmationButtonChild, styles.confirmationLayout]}
+            />
+            <Image
+              style={[styles.maskGroupIcon, styles.confirmationLayout]}
+              resizeMode="cover"
+              source={require("../assets/mask-group1.png")}
+            />
+            <Text style={[styles.signOut, styles.onlineTypo]}>Sign up</Text>
+          </View>
+
+
+        </Pressable>
+
+        <View style={styles.profileChild} />
+      </KeyboardAvoidingView>
     </View>
   );
 };
@@ -281,7 +339,7 @@ const styles = StyleSheet.create({
   name: {
     top: 33,
     fontSize: FontSize.size_sm,
-  
+
 
   },
   username1: {
@@ -312,13 +370,13 @@ const styles = StyleSheet.create({
     top: 350,
     left: 30,
   },
-  pass:{
-    top:470,
-    left:30
+  pass: {
+    top: 470,
+    left: 30
   },
-  pass1:{
-    top:580,
-    left:30
+  pass1: {
+    top: 580,
+    left: 30
   },
   confirmationButtonChild: {
     borderRadius: Border.br_9xl,
@@ -425,86 +483,86 @@ const styles = StyleSheet.create({
     width: 30,
     left: 50,
     position: "absolute",
-    
+
   },
-   tabBarIcon1: {
+  tabBarIcon1: {
     top: 730,
     height: 30,
-    
-    
+
+
   },
-   tabBarIconPosition2: {
+  tabBarIconPosition2: {
     width: 30,
     left: 175,
     position: "absolute",
-    
+
   },
-   tabBarIcon2: {
+  tabBarIcon2: {
     top: 730,
     height: 30,
-    
-    
+
+
   },
-     tabBarIconPosition3: {
+  tabBarIconPosition3: {
     width: 30,
     right: 50,
     position: "absolute",
-    
+
   },
-   tabBarIcon3: {
+  tabBarIcon3: {
     top: 730,
     height: 30,
-    
-    
+
+
   },
-   tabBarIconPosition1: {
+  tabBarIconPosition1: {
     width: 30,
     left: 35,
     position: "absolute",
-    
+
   },
-   tabBarIcon1: {
+  tabBarIcon1: {
     top: 730,
     height: 30,
-    
-    
+
+
   },
-   tabBarIconPosition2: {
+  tabBarIconPosition2: {
     width: 30,
     left: 125,
     position: "absolute",
-    
+
   },
-   tabBarIcon2: {
+  tabBarIcon2: {
     top: 730,
     height: 30,
-    
-    
+
+
   },
-     tabBarIconPosition3: {
+  tabBarIconPosition3: {
     width: 30,
     right: 125,
     position: "absolute",
-    
+
   },
-   tabBarIcon3: {
+  tabBarIcon3: {
     top: 730,
     height: 30,
-    
-    
+
+
   },
-     tabBarIconPosition4: {
+  tabBarIconPosition4: {
     width: 30,
     right: 35,
-   
+
     position: "absolute",
-    
+
   },
-   tabBarIcon4: {
+  tabBarIcon4: {
     top: 730,
     height: 30,
-    
-    
+
+
   },
 });
 
