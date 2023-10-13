@@ -17,7 +17,8 @@ const SignIn = () => {
     };
 
     // Send a POST request to the PHP script
-    fetch('http://192.168.1.101:80/pangasolo/signin.php', {
+    console.log(JSON.stringify(formData));
+    fetch('http://192.168.1.104:80/pangasolo/signin.php', {
         method: 'POST',
         body: JSON.stringify(formData),
         headers: {
@@ -27,7 +28,6 @@ const SignIn = () => {
     .then(response => response.json())
     .then(data => {
         // Handle the response from the server
-        console.log(data);
         // Redirect to the home page or show a success message
         // navigation.navigate("HomePage");
         if (data.status === 'error'){

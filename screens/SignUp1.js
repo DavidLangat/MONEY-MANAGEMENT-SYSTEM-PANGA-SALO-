@@ -45,7 +45,7 @@ const SignUp = () => {
 
     // Send a POST request to the PHP script using Axios
     axios
-      .post("http://192.168.1.101:80/pangasolo/signup.php", formData, {
+      .post("http://192.168.1.104:80/pangasolo/signup.php", formData, {
         headers: { "Content-Type": "application/json" },
       })
       .then((response) => {

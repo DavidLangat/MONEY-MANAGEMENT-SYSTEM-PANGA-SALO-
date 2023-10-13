@@ -30,7 +30,7 @@ const TransactionsDetail = () => {
 
   React.useEffect(() => {
     // Fetch data from the PHP script
-    fetch("http://192.168.1.101:80/pangasolo/getExpenses.php")
+    fetch("http://192.168.1.104:80/pangasolo/getExpenses.php")
       .then((response) => response.json())
       .then((data) => {
         setExpenses(data);
