@@ -1,7 +1,7 @@
-const Stack = createNativeStackNavigator();
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 
+import 'react-native-gesture-handler';
 
 
 import ProfileActive from "./components/ProfileActive";
@@ -31,6 +31,7 @@ import { View, Text, Pressable, TouchableOpacity } from "react-native";
 import Income from "./screens/Income";
 import { LoginStackNavigator } from "./components/navigation/StackNavigator";
 
+const Stack = createNativeStackNavigator();
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
 

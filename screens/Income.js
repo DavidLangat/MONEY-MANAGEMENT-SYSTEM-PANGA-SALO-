@@ -21,7 +21,7 @@ const Income = () => {
     };
 
     // Make a POST request to the server
-    axios.post('http://192.168.1.104:80/pangasolo/expense.php', expenseData)
+    axios.post('http://192.168.1.105:80/pangasolo/expense.php', expenseData)
         .then((response) => {
             if (response.data.status === 'success') {
                 // Expense recorded successfully, handle success logic
@@ -96,26 +96,15 @@ const Income = () => {
       />
       </Pressable>
    
-      <Text style={[styles.profile1, styles.profile1Clr]}>Expense Logging</Text>
+      <Text style={[styles.profile1, styles.profile1Clr]}>Income Logging</Text>
     
          
-      <View style={[styles.firstName, styles.usernameLayout]}>
-        <View>
-          <View style={[styles.usernameChild, styles.childBorder]} />
-          <Text style={[styles.username2, styles.profile1Clr]}>Category</Text>
-          <TextInput
-            style={[styles.name, styles.nameTypo]}
-            value={category}
-            onChangeText={(text) => setCategory(text)}
-            placeholder="Enter category"
-          />
-        </View>
-      </View>
+      
 
       <View style={[styles.lastName, styles.usernameLayout]}>
         <View style={[styles.username1, styles.usernameLayout]}>
           <View style={[styles.usernameChild, styles.childBorder]} />
-          <Text style={[styles.username2, styles.profile1Clr]}>Amount</Text>
+          <Text style={[styles.username2, styles.profile1Clr]}>Enter the Amount your are budgeting on:</Text>
           <TextInput
              style={[styles.name, styles.nameTypo]}
             value={amount}
@@ -127,26 +116,6 @@ const Income = () => {
         </View>
       </View>
 
-      {/* <View style={[styles.dob, styles.usernameLayout]}>
-        <View style={[styles.username1, styles.usernameLayout]}>
-          <View style={[styles.usernameChild, styles.childBorder]} />
-          <Text style={[styles.username2, styles.profile1Clr]}>Select Date</Text>
-          <TextInput
-            style={[styles.name, styles.nameTypo]}
-            
-    
-         date={date}
-        mode="date"
-        placeholder="Select date"
-        format="YYYY-MM-DD"
-        confirmBtnText="Confirm"
-        cancelBtnText="Cancel"
-        onDateChange={(date) => setDate(date)}
-          />
-          <View style={styles.tick1} />
-        </View>
-      
-    </View> */}
     <Pressable
  
     onPress={handleExpenseSubmit}>
@@ -159,7 +128,7 @@ const Income = () => {
           resizeMode="cover"
           source={require("../assets/mask-group1.png")}
         />
-        <Text style={[styles.signOut, styles.onlineTypo]}>Submit Expense</Text>
+        <Text style={[styles.signOut, styles.onlineTypo]}>Submit Income</Text>
       </View>
       
       
@@ -317,6 +286,7 @@ const styles = StyleSheet.create({
     fontSize: FontSize.size_sm,
     left: 0,
     top: 0,
+    fontWeight: 'bold',
   },
   name: {
     top: 33,

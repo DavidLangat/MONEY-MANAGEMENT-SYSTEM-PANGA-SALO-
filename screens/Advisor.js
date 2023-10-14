@@ -44,14 +44,18 @@ const styles = StyleSheet.create({
   advisorName: {
     fontSize: 18,
     fontWeight: 'bold',
+    color:'black'
   },
   advisorSpecialization: {
     fontSize: 16,
     color: '#555',
+    color:'black'
+
   },
   advisorDescription: {
     marginTop: 8,
     fontSize: 14,
+    color:'black'
   },
 });
 

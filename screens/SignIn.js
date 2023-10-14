@@ -18,7 +18,7 @@ const SignIn = () => {
 
     // Send a POST request to the PHP script
     console.log(JSON.stringify(formData));
-    fetch('http://192.168.1.104:80/pangasolo/signin.php', {
+    fetch('http://192.168.1.105:80/pangasolo/signin.php', {
         method: 'POST',
         body: JSON.stringify(formData),
         headers: {

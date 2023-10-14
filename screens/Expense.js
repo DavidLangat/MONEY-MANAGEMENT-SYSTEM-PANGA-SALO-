@@ -21,7 +21,7 @@ const Expense = () => {
     };
 
     // Make a POST request to the server
-    axios.post('http://192.168.1.104:80/pangasolo/expense.php', expenseData)
+    axios.post('http://192.168.1.105:80/pangasolo/expense.php', expenseData)
         .then((response) => {
             if (response.data.status === 'success') {
                 // Expense recorded successfully, handle success logic
