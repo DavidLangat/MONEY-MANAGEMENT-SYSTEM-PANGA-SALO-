@@ -26,6 +26,8 @@ const Expense = () => {
             if (response.data.status === 'success') {
                 // Expense recorded successfully, handle success logic
                 alert(response.data.message);
+                setAmount('');
+                setCategory('')
             } else {
                 // Error occurred, handle error logic
                 alert(response.data.message);

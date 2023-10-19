@@ -12,6 +12,10 @@ import Advisor from '../../screens/Advisor';
 import Education from "../../screens/Education";
 
 import TrackGoals from '../../screens/TrackGoals';
+import AdminEducation from '../../screens/AdminEducation';
+import AdminAdvisor from '../../screens/AdminAdvisor';
+
+
 
 
 const Drawer = createDrawerNavigator();
@@ -25,6 +29,8 @@ const DrawerNavigation = () => {
         <Drawer.Screen name="TrackGoals" component={TrackGoals} />
         <Drawer.Screen name="Education" component={Education} />
         <Drawer.Screen name="Advisor" component={Advisor} />
+        <Drawer.Screen name="AdminEducation" component={AdminEducation} />
+        <Drawer.Screen name="AdminAdvisor" component={AdminAdvisor} />
       </Drawer.Navigator>
     
   );

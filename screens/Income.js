@@ -8,24 +8,25 @@ import DatePicker from 'react-native-datepicker';
 import axios from 'axios'; 
 const Income = () => {
   const navigation = useNavigation();
-  const [category, setCategory] = useState('');
-  const [amount, setAmount] = useState('');
-  const [date, setDate] = useState('');
+  const [Income, setIncome] = useState('');
+  const [UserID, setUserID] = useState('');
+  // const [date, setDate] = useState('');
 
-  const handleExpenseSubmit = () => {
+  const handleIncomeSubmit = () => {
     // Prepare the data to send to the server
-    const expenseData = {
-        category,
-        amount,
+    const incomeData = {
+        Income,
+        UserID,
         // date,
     };
 
     // Make a POST request to the server
-    axios.post('http://192.168.1.105:80/pangasolo/expense.php', expenseData)
+    axios.post('http://192.168.1.105:80/pangasolo/income.php', incomeData)
         .then((response) => {
             if (response.data.status === 'success') {
                 // Expense recorded successfully, handle success logic
                 alert(response.data.message);
+                setIncome('');
             } else {
                 // Error occurred, handle error logic
                 alert(response.data.message);
@@ -107,8 +108,8 @@ const Income = () => {
           <Text style={[styles.username2, styles.profile1Clr]}>Enter the Amount your are budgeting on:</Text>
           <TextInput
              style={[styles.name, styles.nameTypo]}
-            value={amount}
-            onChangeText={(text) => setAmount(text)}
+            value={Income}
+            onChangeText={(text) => setIncome(text)}
             placeholder="Enter Amount"
 
           />
@@ -118,7 +119,7 @@ const Income = () => {
 
     <Pressable
  
-    onPress={handleExpenseSubmit}>
+    onPress={handleIncomeSubmit}>
       <View style={[styles.confirmationButton, styles.confirmationLayout]}>
         <View
           style={[styles.confirmationButtonChild, styles.confirmationLayout]}

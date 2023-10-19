@@ -5,14 +5,33 @@ import { useNavigation } from "@react-navigation/native";
 import { Border, Color, FontFamily, FontSize } from "../GlobalStyles";
 import  { useState } from 'react';
 import DatePicker from 'react-native-datepicker';
+import axios from "axios";
 const Profile = () => {
   const navigation = useNavigation();
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [email, setEmail] = useState('');
+  const [net, setnetIncome] = useState('');
 
   
-  
+  const [userData, setUserData] = useState({"email": "", "firstname": "", "id": 0, "lastname": "", "net": 0, "password": ""});
+  const [userid, setUserId] = useState(8); // Change this to the desired user ID
+
+  React.useEffect(() => {
+    // Function to fetch user details by userid
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get(`http://192.168.1.105:80/pangasolo/getuser.php?userid=${userid}`);
+
+        if (response.data) {
+          setUserData(response.data);
+        }
+      } catch (error) {
+        console.error('Error fetching user details:', error);
+      }
+    }
+    fetchUserData();
+}),[]
 
 
   return (
@@ -42,7 +61,7 @@ const Profile = () => {
           <Text style={[styles.username2, styles.profile1Clr]}>FirstName</Text>
           <TextInput
             style={[styles.name, styles.nameTypo]}
-            value={firstname}
+            value={userData.firstname}
             onChangeText={(text) => setFirstname(text)}
             placeholder="John "
           />
@@ -55,9 +74,23 @@ const Profile = () => {
           <Text style={[styles.username2, styles.profile1Clr]}>LastName</Text>
           <TextInput
              style={[styles.name, styles.nameTypo]}
-            value={lastname}
+            value={userData.lastname}
             onChangeText={(text) => setLastname(text)}
             placeholder="Doe"
+
+          />
+          <View style={styles.tick1} />
+        </View>
+      </View>
+      <View style={[styles.net, styles.usernameLayout]}>
+        <View style={[styles.username1, styles.usernameLayout]}>
+          <View style={[styles.usernameChild, styles.childBorder]} />
+          <Text style={[styles.username2, styles.profile1Clr]}>NetIncome</Text>
+          <TextInput
+             style={[styles.name, styles.nameTypo]}
+            value={userData.net}
+            onChangeText={(text) => setnetIncome(text)}
+            placeholder=""
 
           />
           <View style={styles.tick1} />
@@ -70,7 +103,7 @@ const Profile = () => {
           <Text style={[styles.username2, styles.profile1Clr]}>Email</Text>
           <TextInput
            style={[styles.name, styles.nameTypo]}
-            value={email}
+            value={userData.email}
             onChangeText={(text) => setEmail(text)}
             placeholder="JohnDoe@gmail.com"
           />
@@ -264,7 +297,7 @@ const styles = StyleSheet.create({
     left: 30,
   },
   firstName: {
-    top: 250,
+    top: 190,
     left: 30,
   },
   tick1: {
@@ -276,7 +309,11 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   lastName: {
-    top: 360,
+    top: 290,
+    left: 30,
+  },
+  net:{
+    top: 370,
     left: 30,
   },
   dob: {
