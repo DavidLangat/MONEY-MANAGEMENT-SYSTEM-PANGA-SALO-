@@ -19,6 +19,8 @@ const SignUp = () => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
+  const [net, setNet] = useState(0);
+
   const [password, setPassword] = useState("");
   const [cpassword, setCpassword] = useState("");
   const [error, setError] = useState(""); // Error state
@@ -41,11 +43,12 @@ const SignUp = () => {
       lastname,
       email,
       password,
+      net
     };
 
     // Send a POST request to the PHP script using Axios
     axios
-      .post("http://192.168.1.104:80/pangasolo/signup.php", formData, {
+      .post("http://192.168.1.105:80/pangasolo/signup.php", formData, {
         headers: { "Content-Type": "application/json" },
       })
       .then((response) => {
@@ -53,6 +56,12 @@ const SignUp = () => {
         console.log(response.data);
         // Redirect to the home page or show a success message
              alert('User Registration successfully');
+             setFirstname('')
+             setLastname('')
+             setNet('')
+             setPassword('')
+             setEmail('')
+             setCpassword('')
         navigation.navigate("SignIn");
       })
       .catch((error) => {
@@ -108,6 +117,21 @@ const SignUp = () => {
               value={lastname}
               onChangeText={(text) => setLastname(text)}
               placeholder="Enter your Lastname"
+
+            />
+            <View style={styles.tick1} />
+          </View>
+        </View>
+        <View style={[styles.lastNet, styles.usernameLayout]}>
+          <View style={[styles.username1, styles.usernameLayout]}>
+            <View style={[styles.usernameChild, styles.childBorder]} />
+            <Text style={[styles.username2, styles.profile1Clr]}>NetIncome</Text>
+            <TextInput
+              style={[styles.name, styles.nameTypo]}
+              value={net}
+              onChangeText={(text) => setNet(text)}
+              placeholder="Enter your netIncome"
+              keyboardType="phone-pad"
 
             />
             <View style={styles.tick1} />
@@ -316,7 +340,7 @@ const styles = StyleSheet.create({
     height: 110,
   },
   profile1: {
-    top: 70,
+    top: 20,
     fontSize: 40,
     fontWeight: "700",
     fontFamily: FontFamily.montserratBold,
@@ -351,7 +375,7 @@ const styles = StyleSheet.create({
     left: 30,
   },
   firstName: {
-    top: 160,
+    top: 90,
     left: 30,
   },
   tick1: {
@@ -363,11 +387,16 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   lastName: {
-    top: 260,
+    top: 180,
+    left: 30,
+  },
+  lastNet:
+  {
+    top: 270,
     left: 30,
   },
   dob: {
-    top: 350,
+    top: 360,
     left: 30,
   },
   pass: {

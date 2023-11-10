@@ -1,241 +1,317 @@
 import * as React from "react";
-import { StyleSheet, View, Image, Text, Pressable,TextInput } from "react-native";
-import LinearGradient from "react-native-linear-gradient";
+import { Image, StyleSheet, Text, View, Pressable,FlatList, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Border, Color, FontFamily, FontSize } from "../GlobalStyles";
-import  { useState } from 'react';
-import DatePicker from 'react-native-datepicker';
-import axios from 'axios'; 
-const Income = () => {
+import { Color, FontSize, FontFamily, Border } from "../GlobalStyles";
+
+const Transactions = () => {
   const navigation = useNavigation();
-  const [category, setCategory] = useState('');
-  const [amount, setAmount] = useState('');
-  const [date, setDate] = useState('');
+  const [education, setEducation] = React.useState( [{"Title":"","SubTitle":"","Content":""}]);
 
-  const handleExpenseSubmit = () => {
-    // Prepare the data to send to the server
-    const expenseData = {
-        category,
-        amount,
-        // date,
-    };
+  
 
-    // Make a POST request to the server
-    axios.post('http://192.168.1.104:80/pangasolo/expense.php', expenseData)
-        .then((response) => {
-            if (response.data.status === 'success') {
-                // Expense recorded successfully, handle success logic
-                alert(response.data.message);
-            } else {
-                // Error occurred, handle error logic
-                alert(response.data.message);
-            }
-        })
-        .catch((error) => {
-            // Handle network or other errors
-            console.error(error);
-        });
-};
-  return (
-    <View style={styles.profile}>
-      <LinearGradient
-        style={[styles.purple, styles.blueLayout]}
-        locations={[0, 1]}
-        colors={["rgba(181, 47, 248, 0)", "#b52ff8"]}
-        useAngle={true}
-        angle={186.55}
-      />
-      <LinearGradient
-        style={[styles.blue, styles.blueLayout]}
-        locations={[0, 1]}
-        colors={["rgba(64, 206, 242, 0)", "#40cef2"]}
-        useAngle={true}
-        angle={191.45}
-      />
-      <Pressable
-        
-        onPress={() => navigation.navigate("HomePage")}
-      >
-        <Image
-        style={[styles.tabBarIcon1, styles.tabBarIconPosition1]}
-        
-        
-        source={require("../assets/home.png")}
-      />
-      </Pressable>
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      fetch("http://192.168.1.105:80/pangasolo/getEducation.php")
+      .then((response) => response.json())
+      .then((data) => {
+        setEducation(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+    }, 2000); // 2000 milliseconds (2 seconds)
 
-      <Pressable
-        onPress={() => navigation.navigate("Notification1")}
-      >
-         <Image
-        style={[styles.tabBarIcon3, styles.tabBarIconPosition3]}
-        
-        
-        source={require("../assets/bell.png")}
-      />
-      </Pressable>
-      
-       <Pressable
-        onPress={() => navigation.navigate("Expense")}
-      >
-        <Image
-        style={[styles.tabBarIcon2, styles.tabBarIconPosition2]}
-        
-        
-        source={require("../assets/expenses.png")}
-      />
-      </Pressable> 
-       <Pressable
-        onPress={() => navigation.navigate("Reports")}
-      >
-        <Image
-        style={[styles.tabBarIcon4, styles.tabBarIconPosition4]}
-        
-        
-        source={require("../assets/report.png")}
-      />
-      </Pressable>
+    // Clear the interval when the component unmounts
+    return () => clearInterval(interval);
+  }, []);
+
+    // Fetch data from the PHP script
    
-      <Text style={[styles.profile1, styles.profile1Clr]}>Expense Logging</Text>
-    
-         
-      <View style={[styles.firstName, styles.usernameLayout]}>
-        <View>
-          <View style={[styles.usernameChild, styles.childBorder]} />
-          <Text style={[styles.username2, styles.profile1Clr]}>Category</Text>
-          <TextInput
-            style={[styles.name, styles.nameTypo]}
-            value={category}
-            onChangeText={(text) => setCategory(text)}
-            placeholder="Enter category"
-          />
-        </View>
+  
+
+  
+  const renderItem = ({ item }) => (
+    <View 
+    className='py-3 w-screen flex flex-row justify-between px-8 items-center w-full'
+    >
+
+      <View 
+      className="flex flex-col justify-start"
+      >
+        <Text className=" font-semibold text-base text-blue-100 capitalize">{item.Title}</Text>
+        <Text className="font-semibold text-xs text-blue-300 capitalize">{item.subTitle}</Text>
+      <Text className="font-semibold text-sm text-blue-100 capitalize" >{item.content}</Text>
       </View>
-
-      <View style={[styles.lastName, styles.usernameLayout]}>
-        <View style={[styles.username1, styles.usernameLayout]}>
-          <View style={[styles.usernameChild, styles.childBorder]} />
-          <Text style={[styles.username2, styles.profile1Clr]}>Amount</Text>
-          <TextInput
-             style={[styles.name, styles.nameTypo]}
-            value={amount}
-            onChangeText={(text) => setAmount(text)}
-            placeholder="Enter Amount"
-
-          />
-          <View style={styles.tick1} />
-        </View>
-      </View>
-
-      {/* <View style={[styles.dob, styles.usernameLayout]}>
-        <View style={[styles.username1, styles.usernameLayout]}>
-          <View style={[styles.usernameChild, styles.childBorder]} />
-          <Text style={[styles.username2, styles.profile1Clr]}>Select Date</Text>
-          <TextInput
-            style={[styles.name, styles.nameTypo]}
-            
+      <View>
     
-         date={date}
-        mode="date"
-        placeholder="Select date"
-        format="YYYY-MM-DD"
-        confirmBtnText="Confirm"
-        cancelBtnText="Cancel"
-        onDateChange={(date) => setDate(date)}
-          />
-          <View style={styles.tick1} />
-        </View>
-      
-    </View> */}
-    <Pressable
+      </View>
+    </View>
+  );
+  
+  return (
+    <View style={styles.transactions}>
+      {/* <Image
+        // style={[styles.transactionsChild, styles.transactionsLayout]}
+        resizeMode="stretch"
+        source={require("../assets/rectangle-17.png")}
+        className="absolute  w-screen mt-5"
+      />
+      <Image
+        // style={[styles.transactionsItem, styles.transactionsLayout]}
+        resizeMode="stretch"
+        source={require("../assets/rectangle-16.png")}
+        className="absolute  w-screen "
+      /> */}
+      <Image
  
-    onPress={handleExpenseSubmit}>
-      <View style={[styles.confirmationButton, styles.confirmationLayout]}>
-        <View
-          style={[styles.confirmationButtonChild, styles.confirmationLayout]}
-        />
-        <Image
-          style={[styles.maskGroupIcon, styles.confirmationLayout]}
-          resizeMode="cover"
-          source={require("../assets/mask-group1.png")}
-        />
-        <Text style={[styles.signOut, styles.onlineTypo]}>Submit Expense</Text>
+    //     top: 271,
+    // height: 541,
+    // width: 375,
+    // left: 0,
+    // position: "absolute",
+    //  margin:5,
+        resizeMode="stretch"
+        source={require("../assets/rectangle-18.png")}
+        className="top-[20] w-screen  h-screen"
+      />
+      <View style={{height:700 ,position:'absolute'}}
+      className='top-[50px] w-screen'
+      >
+      <FlatList
+      data={education.educationList}
+      renderItem={(item) =>renderItem(item)}
+      keyExtractor={(item) => item.id}
+      // style={{
+      //   height:400,
+      //   width:300,
+      // }}
+      className='w-screen h-[300]'
+
+      //           renderItem={({ item, index }) => renderGridItem(item, index)}
+
+    />
+
       </View>
       
-      
-      </Pressable>
-      
-      <View style={styles.profileChild} />
+      {/* <View style={[styles.navigationBar, styles.travel1IconLayout]}>
+        <Text style={[styles.transactions2, styles.text6FlexBox]}>
+       Expense History 
+        </Text>
+        <TouchableOpacity
+          onPress={navigation.goBack}
+          style={[styles.navArrow2Icon, styles.timePosition]}
+
+        >
+
+        <Image
+          // style={[styles.navArrow2Icon, styles.timePosition]}
+          resizeMode="cover"
+          source={require("../assets/navarrow-2.png")}
+
+        />
+        </TouchableOpacity>
+      </View> */}
+     
+     
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  blueLayout: {
-    backgroundColor: "transparent",
-    transform: [
-      {
-        rotate: "36deg",
-      },
-    ],
-    height: 300,
-    width: 300,
-    borderRadius: Border.br_131xl,
-    position: "absolute",
-  },
-  light1Position: {
+  transactionsLayout: {
+    height: 245,
     width: 375,
     left: 0,
     position: "absolute",
   },
-  iconLayout: {
-    maxHeight: "100%",
-    maxWidth: "100%",
+  sportsLayout: {
+    height: 48,
+    position: "absolute",
+  },
+  shoppingPosition: {
+    height: 39,
+    left: 56,
+    top: 5,
+    position: "absolute",
+  },
+  timeClr: {
+    color: Color.colorWhite,
+    textAlign: "left",
+  },
+  textTypo: {
+    textAlign: "right",
+    fontSize: FontSize.size_sm,
+    top: 16,
+    color: Color.colorWhite,
+    fontFamily: FontFamily.montserratRegular,
+    position: "absolute",
+  },
+  travel1IconLayout: {
+    height: 24,
+    position: "absolute",
+  },
+  iconPosition: {
+    top: 0,
     position: "absolute",
     overflow: "hidden",
   },
-  profile1Clr: {
-    color: Color.colorDarkslategray,
-    textAlign: "left",
+  iconLayout: {
+    maxHeight: "100%",
+    maxWidth: "100%",
+    overflow: "hidden",
+  },
+  timePosition: {
+    left: "0%",
+    top: "0%",
     position: "absolute",
   },
-  usernameLayout: {
-    height: 58,
+  text6FlexBox: {
+    textAlign: "center",
+    position: "absolute",
+  },
+  searchLayout: {
+    height: 53,
     width: 315,
     position: "absolute",
   },
-  childBorder: {
-    borderStyle: "solid",
-    left: 0,
+  transactionsChild: {
+    top: 5,
+    height: 245,
+    margin:5,
   },
-  nameTypo: {
-    color: Color.colorMediumblue_200,
-    fontFamily: FontFamily.sFProText,
+  transactionsItem: {
+    top: -5,
+    margin:5,
+    
+  },
+  transactionsInner: {
+    top: 271,
+    height: 541,
+    width: 375,
+    left: 0,
+    position: "absolute",
+     margin:5,
+  },
+  shopping1: {
     textAlign: "left",
-    left: 0,
-    position: "absolute",
-  },
-  confirmationLayout: {
-    height: 52,
-    position: "absolute",
-  },
-  onlineTypo: {
+    fontFamily: FontFamily.montserratRegular,
     fontSize: FontSize.size_base,
-    color: Color.colorMediumblue_200,
+    top: 0,
+    left: 0,
+    position: "absolute",
+  },
+  march2021820: {
+    top: 24,
+    fontSize: FontSize.size_xs,
+    color: Color.colorSkyblue_100,
     textAlign: "left",
+    fontFamily: FontFamily.montserratRegular,
+    left: 0,
     position: "absolute",
   },
-  profileInfoLayout: {
-    height: 60,
+  shoppingDetails: {
+    width: 137,
+  },
+  text: {
+    left: 230,
+  },
+  shoppingIcon: {
+    width: 48,
+    top: -15,
+    left:-10,
+  },
+  smallArrow3: {
+    top: 18,
+    left: 320,
+    width: 7,
+    height: 12,
     position: "absolute",
+    overflow: "hidden",
   },
-  purple: {
-    top: -110,
-    left: 366,
+  shopping: {
+    width: 327,
+    height: 48,
+    left: 1,
+    top: 0,
   },
-  blue: {
-    top: -241,
-    left: 218,
+  shoppingDetails1: {
+    width: 133,
+  },
+  text1: {
+    left: 263,
+  },
+  shopping2: {
+    top: 192,
+    width: 327,
+    height: 48,
+    left: 1,
+  },
+  shoppingDetails2: {
+    width: 134,
+  },
+  text2: {
+    left: 265,
+  },
+  travel1Icon: {
+    top: 12,
+    left: 12,
+    width: 24,
+    overflow: "hidden",
+  },
+  travel: {
+    top: 256,
+    width: 327,
+    height: 48,
+    left: 0,
+  },
+  shoppingDetails3: {
+    width: 136,
+  },
+  text3: {
+    left: 252,
+  },
+  medicine: {
+    top: 64,
+    width: 327,
+    height: 48,
+    left: 0,
+  },
+  shoppingDetails4: {
+    width: 138,
+  },
+  text4: {
+    left: 253,
+  },
+  sport1Icon: {
+    // left: 10,
+    width: 28,
+    height: 16,
+  },
+  sports: {
+    // top: 128,
+    width: 327,
+    height: 48,
+    left: 0,
+  },
+  shoppingDetails5: {
+    width: 129,
+  },
+  text5: {
+    left: 246,
+  },
+  sports2: {
+    top: 320,
+    width: 327,
+    height: 48,
+    left: 1,
+  },
+  transactions1: {
+    top: 392,
+    width: 328,
+    height: 368,
+    left: 31,
+    position: "absolute",
   },
   batteryIcon: {
     height: "62.96%",
@@ -244,298 +320,116 @@ const styles = StyleSheet.create({
     right: "0%",
     bottom: "12.96%",
     left: "92.59%",
+    position: "absolute",
   },
-  wifiIcon: {
-    height: "61.11%",
-    width: "4.67%",
-    top: "24.06%",
-    right: "8.94%",
-    bottom: "14.83%",
-    left: "86.39%",
-  },
-  cellularConnectionIcon: {
-    height: "59.26%",
-    width: "5.18%",
-    top: "25.93%",
-    right: "15.13%",
-    bottom: "14.82%",
-    left: "79.69%",
-  },
+ 
   time: {
     fontSize: FontSize.size_mini,
     fontFamily: FontFamily.robotoRegular,
-    color: Color.colorBlack,
     textAlign: "left",
-    left: "0%",
-    top: "0%",
-    position: "absolute",
+    color: Color.colorWhite,
   },
   barsStatusBarIphoneX: {
     width: "8.84%",
     right: "91.16%",
     bottom: "0%",
-    left: "0%",
-    top: "0%",
     height: "100%",
-    position: "absolute",
+    left: "0%",
   },
-  barsStatusBarIphoneL: {
+  barsStatusBarIphoneD: {
     height: "40.91%",
-    width: "87.51%",
+    width: "87.28%",
     top: "29.55%",
-    right: "3.82%",
+    right: "4.08%",
     bottom: "29.55%",
-    left: "8.66%",
+    left: "8.64%",
     position: "absolute",
   },
-  light1: {
+  dark1: {
+    width: 376,
     height: 44,
     top: 0,
+    left: 0,
+    position: "absolute",
     overflow: "hidden",
   },
-  tabBarIcon: {
-    top: 702,
-    height: 110,
-  },
-  profile1: {
-    top: 70,
-    fontSize: 40,
+  transactions2: {
+    left: "50.89%",
+    fontSize: FontSize.size_mid,
+    fontFamily: FontFamily.sFProText,
+    textAlign: "center",
     fontWeight: "700",
-    fontFamily: FontFamily.montserratBold,
-    left: 30,
+    color: Color.colorWhite,
+    top: "0%",
   },
-  usernameChild: {
-    top: 70,
-    borderColor: Color.colorLavender,
-    borderTopWidth: 7,
-    width: 316,
-    height: 1,
-    position: "absolute",
-  },
-  username2: {
-    fontFamily: FontFamily.montserratRegular,
-    fontSize: FontSize.size_sm,
-    left: 0,
-    top: 0,
-  },
-  name: {
-    top: 33,
-    fontSize: FontSize.size_sm,
-  },
-  username1: {
-    left: 0,
-    top: 0,
-  },
-  username: {
-    top: 250,
-    left: 30,
-  },
-  firstName: {
-    top: 230,
-    left: 30,
-  },
-  tick1: {
-    top: 28,
-    left: 281,
-    width: 18,
-    height: 13,
-    position: "absolute",
-    overflow: "hidden",
-  },
-  lastName: {
-    top: 330,
-    left: 30,
-  },
-  dob: {
-    top: 450,
-    left: 30,
-  },
-  confirmationButtonChild: {
-    borderRadius: Border.br_9xl,
-    borderColor: Color.colorMediumblue_200,
-    borderWidth: 1,
-    width: 317,
-    height: 52,
-    borderStyle: "solid",
-    left: 0,
-    top: 0,
-  },
-  maskGroupIcon: {
-    width: 321,
-    left: 0,
-    top: 0,
-  },
-  signOut: {
-    top: 16,
-    fontFamily: FontFamily.montserratRegular,
-    left: 100,
-  },
-  confirmationButton: {
-    top: 580,
-    left: 29,
-    width: 317,
-    height: 52,
-  },
-  icon: {
+  navArrow2Icon: {
+    width: "11.27%",
+    right: "88.73%",
+    bottom: "0%",
     height: "100%",
+    left: "0%",
     maxHeight: "100%",
     maxWidth: "100%",
     overflow: "hidden",
-    width: "100%",
   },
-  page1: {
-    left: "75%",
-    top: "76.16%",
-    right: "18.57%",
-    bottom: "16.14%",
-    width: "5.43%",
-    height: "2.7%",
-    position: "absolute",
-  },
-  whiteIcon: {
-    top: -9,
-    left: -13,
-    borderRadius: 22,
-    width: 87,
-    height: 87,
-    position: "absolute",
-  },
-  imageOnlineChild: {
-    top: 49,
-    left: 48,
-    width: 12,
-    height: 11,
-    position: "absolute",
-  },
-  imageOnline: {
-    width: 60,
-    left: 0,
-    top: 0,
-  },
-  sukhbirMahey: {
-    fontSize: FontSize.size_xl,
-    fontWeight: "500",
-    top: 0,
-  },
-  online: {
-    top: 32,
-    fontWeight: "300",
-    fontFamily: FontFamily.sFProText,
-    fontSize: FontSize.size_base,
-    left: 0,
-  },
-  sukhbirMaheyParent: {
-    top: 4,
-    left: 70,
-    width: 144,
-    height: 51,
-    position: "absolute",
-  },
-  profileInfo: {
-    top: 130,
-    width: 214,
+  navigationBar: {
+    top: 25,
     left: 30,
+    width: 213,
   },
-  profileChild: {
-    top: 60,
-    left: 94,
-    width: 6,
-    height: 7,
-    position: "absolute",
-    overflow: "hidden",
+  yourTotalExpenses: {
+    top: 90,
+    left: 100,
+    fontSize: FontSize.size_3xl,
+    color: Color.colorPaleturquoise,
+    fontFamily: FontFamily.montserratRegular,
   },
-  profile: {
-    backgroundColor: Color.colorWhite,
+  text6: {
+    top: 130,
+    left: 124,
+    fontSize: FontSize.size_9xl,
+    fontFamily: FontFamily.montserratBold,
+    fontWeight: "800",
+    color: Color.colorWhite,
+  },
+  rectanglePressable: {
+   top: 195,
+    left: 100,
+    fontWeight: "700",
+    fontSize: FontSize.size_9xl,
+    color:Color.colorDarkblue,
+    fontFamily: FontFamily.montserratRegular,
+  },
+  searchBarChild: {
+    borderRadius: Border.br_41xl,
+    backgroundColor: Color.colorDarkblue,
+    top: 0,
+    left: 0,
+  },
+  search: {
+    top: 17,
+    left: 45,
+    color: Color.colorMediumslateblue_100,
+    fontFamily: FontFamily.sFProText,
+    textAlign: "center",
+    fontSize: FontSize.size_base,
+  },
+  search1Icon: {
+    left: 15,
+    width: 22,
+    height: 21,
+  },
+  searchBar: {
+    top: 315,
+    left: 31,
+  },
+  transactions: {
     flex: 1,
+    width: "100%",
     height: 812,
     overflow: "hidden",
-    width: "100%",
-  },
-  tabBarIconPosition1: {
-    width: 30,
-    left: 50,
-    position: "absolute",
-    
-  },
-   tabBarIcon1: {
-    top: 730,
-    height: 30,
-    
-    
-  },
-   tabBarIconPosition2: {
-    width: 30,
-    left: 175,
-    position: "absolute",
-    
-  },
-   tabBarIcon2: {
-    top: 730,
-    height: 30,
-    
-    
-  },
-     tabBarIconPosition3: {
-    width: 30,
-    right: 50,
-    position: "absolute",
-    
-  },
-   tabBarIcon3: {
-    top: 730,
-    height: 30,
-    
-    
-  },
-   tabBarIconPosition1: {
-    width: 30,
-    left: 35,
-    position: "absolute",
-    
-  },
-   tabBarIcon1: {
-    top: 730,
-    height: 30,
-    
-    
-  },
-   tabBarIconPosition2: {
-    width: 30,
-    left: 125,
-    position: "absolute",
-    
-  },
-   tabBarIcon2: {
-    top: 730,
-    height: 30,
-    
-    
-  },
-     tabBarIconPosition3: {
-    width: 30,
-    right: 125,
-    position: "absolute",
-    
-  },
-   tabBarIcon3: {
-    top: 730,
-    height: 30,
-    
-    
-  },
-     tabBarIconPosition4: {
-    width: 30,
-    right: 35,
-   
-    position: "absolute",
-    
-  },
-   tabBarIcon4: {
-    top: 730,
-    height: 30,
-    
-    
+    backgroundColor: Color.colorWhite,
   },
 });
 
-export default Income;
+export default Transactions;

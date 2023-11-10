@@ -13,6 +13,8 @@ import Onboarding2 from "../../screens/Onboarding2";
 import Onboarding21 from "../../screens/Onboarding21";
 import Onboarding1 from "../../screens/Onboarding1";
 import HomePage from "../../screens/HomePage";
+import MyDrawer from "./DrawerNavigation";
+import DrawerNavigation from "./DrawerNavigation";
 
 
 const Stack = createNativeStackNavigator();
@@ -27,8 +29,10 @@ const screenOptionStyle = {
 
 const MainStackNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={screenOptionStyle} initialRouteName={"HomeScreen"}>
+    <Stack.Navigator screenOptions={screenOptionStyle} initialRouteName={"HomeScreen"} >
       <Stack.Screen name="HomePage" component={HomePage} />
+      <Stack.Screen name="Menu" component={DrawerNavigation}  />
+
       <Stack.Screen
               name="Profile"
               component={Profile}

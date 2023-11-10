@@ -18,9 +18,42 @@ const Reports = () => {
   // Calculate total income and total expenses
   const totalIncome = incomeData.reduce((sum, item) => sum + item.amount, 0);
   const totalExpenses = expenseData.reduce((sum, item) => sum + item.amount, 0);
+  const [data,setData]=React.useState([]);
 
   // Calculate the net income (income - expenses)
   const netIncome = totalIncome - totalExpenses;
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      handleIncome();
+    }, 2000); // 2000 milliseconds (2 seconds)
+
+    // Clear the interval when the component unmounts
+    return () => clearInterval(interval);
+  }, []);
+  const handleIncome = () => {
+    // Create an object with the form data
+    const formData = {
+       
+    };
+
+    // Send a POST request to the PHP script
+    fetch('http://192.168.1.105:80/pangasolo/Getincome.php', {
+        method: 'POST',
+        body: JSON.stringify(formData),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+       
+       setData(data)
+        
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+};
 
   return (
     <View style={styles.container}>
@@ -29,15 +62,19 @@ const Reports = () => {
       <View style={styles.summaryContainer}>
         <View style={styles.summaryItem}>
           <Text style={styles.summaryLabel}>Total Income</Text>
-          <Text style={styles.summaryValue}>KSH.{totalIncome}</Text>
+          <Text style={styles.summaryValue}>KSH.{data.totalIncome}</Text>
         </View>
         <View style={styles.summaryItem}>
           <Text style={styles.summaryLabel}>Total Expenses</Text>
-          <Text style={styles.summaryValue}>KSH.{totalExpenses}</Text>
+          <Text style={styles.summaryValue}>KSH.{data.totalExpenses}</Text>
+        </View>
+        <View style={styles.summaryItem}>
+          <Text style={styles.summaryLabel}>Target Goal</Text>
+          <Text style={styles.summaryValue}>KSH.{data.Goal}</Text>
         </View>
         <View style={styles.summaryItem}>
           <Text style={styles.summaryLabel}>Net Income</Text>
-          <Text style={styles.summaryValue}>KSH.{netIncome}</Text>
+          <Text style={styles.summaryValue}>KSH.{data.net}</Text>
         </View>
       </View>
 

@@ -5,7 +5,41 @@ import { useNavigation } from "@react-navigation/native";
 import { Border, FontFamily, FontSize, Color } from "../GlobalStyles";
 
 const HomePage = () => {
+  const [income,setIncome]=React.useState(0)
   const navigation = useNavigation();
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      handleIncome();
+    }, 2000); // 2000 milliseconds (2 seconds)
+
+    // Clear the interval when the component unmounts
+    return () => clearInterval(interval);
+  }, []);
+  const handleIncome = () => {
+    // Create an object with the form data
+    const formData = {
+       
+    };
+
+    // Send a POST request to the PHP script
+    fetch('http://192.168.1.105:80/pangasolo/Getincome.php', {
+        method: 'POST',
+        body: JSON.stringify(formData),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Handle the response from the server
+        // Redirect to the home page or show a success message
+       setIncome(data.balance)
+        
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+};
 
   return (
     <View style={[styles.homePage, styles.iconLayout1]}>
@@ -75,7 +109,7 @@ JOHN,`}</Text>
         <Text style={[styles.yourAccountBalance, styles.yourTypo]}>
           Your account balance
         </Text>
-        <Text style={[styles.text, styles.timeFlexBox]}>KSH.8900.00</Text>
+        <Text style={[styles.text, styles.timeFlexBox]}>KSH.{income}</Text>
         <Image
           style={styles.more1Icon}
           resizeMode="cover"

@@ -1,138 +1,174 @@
-import * as React from "react";
-import { StyleSheet, View, Image, Text, Pressable,TextInput, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  View,
+  Image,
+  Text,
+  Pressable,
+  TextInput,
+  KeyboardAvoidingView,
+  ScrollView,
+} from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import { Border, Color, FontFamily, FontSize } from "../GlobalStyles";
-import  { useState } from 'react';
-import DatePicker from 'react-native-datepicker';
-import axios from 'axios'; 
-const TrackGoals = () => {
-  const navigation = useNavigation();
-  const [Goal, setGoal] = useState('');
-  const [UserID, setUserID] = useState(8);
+import axios from "axios";
+import { Title } from "react-native-paper";
 
-  const handleGoal = () => {
-    // Prepare the data to send to the server
-    const goalData = {
-        Goal,UserID
-        // date,
+const AdminAdvisor = () => {
+  const navigation = useNavigation();
+  const [Name, setName] = useState("");
+  const [Title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [email, setEmail] = useState("");
+  
+  
+
+  const handleAdvisor = () => {
+    // Basic validation
+   
+
+    // Create an object with the form data
+    const formData = {
+      Name,
+      Title,
+      content,
+      email
     };
 
-    // Make a POST request to the server
-    axios.post('http://192.168.1.105:80/pangasolo/Goal.php', goalData)
-        .then((response) => {
-            if (response.data.status === 'success') {
-                // Expense recorded successfully, handle success logic
-                alert(response.data.message);
-            } else {
-                // Error occurred, handle error logic
-                alert(response.data.message);
-            }
-        })
-        .catch((error) => {
-            // Handle network or other errors
-            console.error(error);
-        });
-};
+    // Send a POST request to the PHP script using Axios
+    axios
+      .post("http://192.168.1.105:80/pangasolo/AdminAdvisor.php", formData, {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then((response) => {
+        // Handle the response from the server
+        console.log(response.data);
+        // Redirect to the home page or show a success message
+             alert('Education added successfully');
+             setName('')
+             setTitle('')
+             setContent('')
+             setEmail('')
+             
+        // navigation.navigate("SignIn");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        setError("An error occurred. Please try again.");
+      });
+  };
+
   return (
     <View style={styles.profile}>
-      <LinearGradient
-        style={[styles.purple, styles.blueLayout]}
-        locations={[0, 1]}
-        colors={["rgba(181, 47, 248, 0)", "#b52ff8"]}
-        useAngle={true}
-        angle={186.55}
-      />
-      <LinearGradient
-        style={[styles.blue, styles.blueLayout]}
-        locations={[0, 1]}
-        colors={["rgba(64, 206, 242, 0)", "#40cef2"]}
-        useAngle={true}
-        angle={191.45}
-      />
-      <Pressable
-        
-        onPress={() => navigation.navigate("HomePage")}
-      >
-        <Image
-        style={[styles.tabBarIcon1, styles.tabBarIconPosition1]}
-        
-        
-        source={require("../assets/home.png")}
-      />
-      </Pressable>
+      <KeyboardAvoidingView behavior="position" style={styles.container}>
 
-      <Pressable
-        onPress={() => navigation.navigate("Notification1")}
-      >
-         <Image
-        style={[styles.tabBarIcon3, styles.tabBarIconPosition3]}
-        
-        
-        source={require("../assets/bell.png")}
-      />
-      </Pressable>
-      
-       <Pressable
-        onPress={() => navigation.navigate("Expense")}
-      >
-        <Image
-        style={[styles.tabBarIcon2, styles.tabBarIconPosition2]}
-        
-        
-        source={require("../assets/expenses.png")}
-      />
-      </Pressable> 
-       <Pressable
-        onPress={() => navigation.navigate("Reports")}
-      >
-        <Image
-        style={[styles.tabBarIcon4, styles.tabBarIconPosition4]}
-        
-        
-        source={require("../assets/report.png")}
-      />
-      </Pressable>
-   
-      <Text style={[styles.profile1, styles.profile1Clr]}>Goal Tracking</Text>
-    
-         
-      
+        <LinearGradient
+          style={[styles.purple, styles.blueLayout]}
+          locations={[0, 1]}
+          colors={["rgba(181, 47, 248, 0)", "#b52ff8"]}
+          useAngle={true}
+          angle={186.55}
+        />
+        <LinearGradient
+          style={[styles.blue, styles.blueLayout]}
+          locations={[0, 1]}
+          colors={["rgba(64, 206, 242, 0)", "#40cef2"]}
+          useAngle={true}
+          angle={191.45}
+        />
 
-      <View style={[styles.lastName, styles.usernameLayout]}>
-        <View style={[styles.username1, styles.usernameLayout]}>
-          <View style={[styles.usernameChild, styles.childBorder]} />
-          <Text style={[styles.username2, styles.profile1Clr]}>Enter your Goal:</Text>
-          <TextInput
-             style={[styles.name, styles.nameTypo]}
-            value={Goal}
-            onChangeText={(text) => setGoal(text)}
-            placeholder="Enter Amount"
 
-          />
-          <View style={styles.tick1} />
+        <Text style={[styles.profile1, styles.profile1Clr]}>Financial Advisor</Text>
+
+
+        <View style={[styles.firstName, styles.usernameLayout]}>
+          <View>
+            <View style={[styles.usernameChild, styles.childBorder]} />
+            <Text style={[styles.username2, styles.profile1Clr]}>Name:</Text>
+            <TextInput
+              style={[styles.name, styles.nameTypo]}
+              value={Name}
+              onChangeText={(text) => setName(text)}
+              placeholder="Enter The Name"
+             
+            />
+          </View>
         </View>
-      </View>
 
-    <TouchableOpacity
- 
-    onPress={handleGoal}>
-      <View style={[styles.confirmationButton, styles.confirmationLayout]}>
-        <View
-          style={[styles.confirmationButtonChild, styles.confirmationLayout]}
-        />
-        <Image
-          style={[styles.maskGroupIcon, styles.confirmationLayout]}
-          resizeMode="cover"
-          source={require("../assets/mask-group1.png")}
-        />
-        <Text style={[styles.signOut, styles.onlineTypo]}>Add Goal</Text>
-      </View>
-      
-      
-      </TouchableOpacity>
-      
-      <View style={styles.profileChild} />
+        <View style={[styles.lastName, styles.usernameLayout]}>
+          <View style={[styles.username1, styles.usernameLayout]}>
+            <View style={[styles.usernameChild, styles.childBorder]} />
+            <Text style={[styles.username2, styles.profile1Clr]}>Title:</Text>
+            <TextInput
+              style={[styles.name, styles.nameTypo]}
+              value={Title}
+              onChangeText={(text) => setTitle(text)}
+              placeholder="Enter the Title"
+
+            />
+            <View style={styles.tick1} />
+          </View>
+        </View>
+        
+
+        <View style={[styles.dob, styles.usernameLayout]}>
+          <View style={[styles.username1, styles.usernameLayout]}>
+            <View style={[styles.usernameChild, styles.childBorder]} />
+            <Text style={[styles.username2, styles.profile1Clr]}>Content:</Text>
+            <TextInput
+              style={[styles.name, styles.nameTypo]}
+              value={content}
+              onChangeText={(text) => setContent(text)}
+              placeholder="Enter the content"
+              keyboardType="default" // Default keyboard
+
+            />
+            <View style={styles.tick1} />
+          </View>
+
+        </View>
+        <View style={[styles.pass, styles.usernameLayout]}>
+          <View style={[styles.username1, styles.usernameLayout]}>
+            <View style={[styles.usernameChild, styles.childBorder]} />
+            <Text style={[styles.username2, styles.profile1Clr]}>Email</Text>
+            <TextInput
+              style={[styles.name, styles.nameTypo]}
+              value={email}
+              onChangeText={(text) =>setEmail(text)}
+              placeholder="Enter the email"
+              keyboardType="default" // Default keyboard
+
+            />
+            <View style={styles.tick1} />
+          </View>
+
+          </View>
+        
+        
+        
+       
+        
+        <Pressable
+
+          onPress={handleAdvisor}>
+          <View style={[styles.confirmationButton, styles.confirmationLayout]}>
+            <View
+              style={[styles.confirmationButtonChild, styles.confirmationLayout]}
+            />
+            <Image
+              style={[styles.maskGroupIcon, styles.confirmationLayout]}
+              resizeMode="cover"
+              source={require("../assets/mask-group1.png")}
+            />
+            <Text style={[styles.signOut, styles.onlineTypo]}>Add</Text>
+          </View>
+
+
+        </Pressable>
+
+        <View style={styles.profileChild} />
+      </KeyboardAvoidingView>
     </View>
   );
 };
@@ -265,11 +301,11 @@ const styles = StyleSheet.create({
     height: 110,
   },
   profile1: {
-    top: 70,
+    top: 20,
     fontSize: 40,
     fontWeight: "700",
     fontFamily: FontFamily.montserratBold,
-    left: 30,
+    left: 20,
   },
   usernameChild: {
     top: 70,
@@ -284,11 +320,12 @@ const styles = StyleSheet.create({
     fontSize: FontSize.size_sm,
     left: 0,
     top: 0,
-    fontWeight: 'bold',
   },
   name: {
     top: 33,
     fontSize: FontSize.size_sm,
+
+
   },
   username1: {
     left: 0,
@@ -299,7 +336,7 @@ const styles = StyleSheet.create({
     left: 30,
   },
   firstName: {
-    top: 230,
+    top: 100,
     left: 30,
   },
   tick1: {
@@ -311,12 +348,25 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   lastName: {
-    top: 330,
+    top: 200,
+    left: 30,
+  },
+  lastNet:
+  {
+    top: 290,
     left: 30,
   },
   dob: {
-    top: 450,
+    top: 300,
     left: 30,
+  },
+  pass: {
+    top: 400,
+    left: 30
+  },
+  pass1: {
+    top: 580,
+    left: 30
   },
   confirmationButtonChild: {
     borderRadius: Border.br_9xl,
@@ -336,10 +386,10 @@ const styles = StyleSheet.create({
   signOut: {
     top: 16,
     fontFamily: FontFamily.montserratRegular,
-    left: 100,
+    left: 130,
   },
   confirmationButton: {
-    top: 580,
+    top: 530,
     left: 29,
     width: 317,
     height: 52,
@@ -423,87 +473,87 @@ const styles = StyleSheet.create({
     width: 30,
     left: 50,
     position: "absolute",
-    
+
   },
-   tabBarIcon1: {
+  tabBarIcon1: {
     top: 730,
     height: 30,
-    
-    
+
+
   },
-   tabBarIconPosition2: {
+  tabBarIconPosition2: {
     width: 30,
     left: 175,
     position: "absolute",
-    
+
   },
-   tabBarIcon2: {
+  tabBarIcon2: {
     top: 730,
     height: 30,
-    
-    
+
+
   },
-     tabBarIconPosition3: {
+  tabBarIconPosition3: {
     width: 30,
     right: 50,
     position: "absolute",
-    
+
   },
-   tabBarIcon3: {
+  tabBarIcon3: {
     top: 730,
     height: 30,
-    
-    
+
+
   },
-   tabBarIconPosition1: {
+  tabBarIconPosition1: {
     width: 30,
     left: 35,
     position: "absolute",
-    
+
   },
-   tabBarIcon1: {
+  tabBarIcon1: {
     top: 730,
     height: 30,
-    
-    
+
+
   },
-   tabBarIconPosition2: {
+  tabBarIconPosition2: {
     width: 30,
     left: 125,
     position: "absolute",
-    
+
   },
-   tabBarIcon2: {
+  tabBarIcon2: {
     top: 730,
     height: 30,
-    
-    
+
+
   },
-     tabBarIconPosition3: {
+  tabBarIconPosition3: {
     width: 30,
     right: 125,
     position: "absolute",
-    
+
   },
-   tabBarIcon3: {
+  tabBarIcon3: {
     top: 730,
     height: 30,
-    
-    
+
+
   },
-     tabBarIconPosition4: {
+  tabBarIconPosition4: {
     width: 30,
     right: 35,
-   
+
     position: "absolute",
-    
+
   },
-   tabBarIcon4: {
+  tabBarIcon4: {
     top: 730,
     height: 30,
-    
-    
+
+
   },
 });
 
-export default TrackGoals;
+export default AdminAdvisor;

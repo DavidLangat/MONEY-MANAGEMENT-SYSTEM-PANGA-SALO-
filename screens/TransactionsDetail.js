@@ -18,7 +18,14 @@ const TransactionsDetail = () => {
     test6: 800,
     test7: 900,
   };
-  const backgroundColors = ["#FFC3A0", "#AED9E0", "#B0E57C", "#E0B0E5", "#FFA07A", "#A0C4FF", "#C4A0FF", "#B7E0D6"];
+  const backgroundColors = ["#FFC3A0", "#AED9E0", "#B0E57C", "#E0B0E5",
+   "#FFA07A", "#A0C4FF", "#C4A0FF", "#B7E0D6",
+  "#FFC3A0", "#AED9E0", 
+  "#B0E57C", "#E0B0E5", "#FFA07A", "#A0C4FF", "#C4A0FF", "#B7E0D6","#FFC3A0",
+   "#AED9E0", "#B0E57C", "#E0B0E5", "#FFA07A", "#A0C4FF", "#C4A0FF", "#B7E0D6",
+   "#FFC3A0", "#AED9E0", "#B0E57C", "#E0B0E5", "#FFA07A", "#A0C4FF", "#C4A0FF",
+    "#B7E0D6",
+    "#FFC3A0", "#AED9E0", "#B0E57C", "#E0B0E5", "#FFA07A", "#A0C4FF", "#C4A0FF", "#B7E0D6"];
   const textColors = ["#333333", "#666666", "#444444", "#555555", "#777777", "#222222", "#888888", "#333333"];
 
   const renderGridItem = (item, index) => (
@@ -30,7 +37,7 @@ const TransactionsDetail = () => {
 
   React.useEffect(() => {
     // Fetch data from the PHP script
-    fetch("http://192.168.1.104:80/pangasolo/getExpenses.php")
+    fetch("http://192.168.1.105:80/pangasolo/getExpenses.php")
       .then((response) => response.json())
       .then((data) => {
         setExpenses(data);
